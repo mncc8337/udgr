@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5xcmn458048r"]
+
+[ext_resource type="Script" path="res://scripts/trail.gd" id="1_3vuxt"]
+
+[sub_resource type="Gradient" id="Gradient_ykp7f"]
+offsets = PackedFloat32Array(0.0162602, 0.96748)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fmgnn"]
+gradient = SubResource("Gradient_ykp7f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyip0"]
+transparency = 1
+specular_mode = 2
+albedo_color = Color(1, 1, 1, 0.498039)
+albedo_texture = SubResource("GradientTexture1D_fmgnn")
+albedo_texture_force_srgb = true
+ao_light_affect = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_5s2gh"]
+material = SubResource("StandardMaterial3D_qyip0")
+size = Vector2(1, 0.08)
+
+[node name="trail" type="MeshInstance3D"]
+mesh = SubResource("QuadMesh_5s2gh")
+script = ExtResource("1_3vuxt")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

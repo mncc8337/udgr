@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://t3b2d50e5a4a"]
+
+[ext_resource type="Script" path="res://scripts/gun.gd" id="1_0bpl7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyouw"]
+albedo_color = Color(0.886275, 0.309804, 0, 1)
+roughness = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oqyhu"]
+size = Vector3(1.661, 0.111, 0.076)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1eoyt"]
+
+[node name="wand" type="RigidBody3D" groups=["gun"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5353, 1.30082, -0.378797)
+mass = 3.0
+script = ExtResource("1_0bpl7")
+gun_name = "epic wand"
+damage = 5.0
+max_recoil = 0.0
+inaccuracy = 0.3
+firing_speed = 0.001
+magazine_size = 500
+
+[node name="dsd" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24177, 0, 0)
+material_override = SubResource("StandardMaterial3D_jyouw")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="dsd"]
+size = Vector3(1.661, 0.111, 0.076)
+
+[node name="col3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24177, 0, 0)
+shape = SubResource("BoxShape3D_oqyhu")
+
+[node name="flash" type="OmniLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.02698, -0.0100477, 0)
+visible = false
+light_color = Color(0, 1, 0.52549, 1)
+light_energy = 5.289
+omni_range = 424.522
+
+[node name="flash_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="raycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0995, -0.00203943, 0)
+target_position = Vector3(10000, 0, 0)
+
+[node name="start" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.455343, -0.00203943, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1eoyt")
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

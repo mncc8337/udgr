@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bu0rd8q5qya7e"]
+
+[ext_resource type="FontFile" uid="uid://bwdrgea60e1m3" path="res://fonts/LcdSolid-VPzB.ttf" id="1_iotu2"]
+
+[resource]
+line_spacing = 0.0
+font = ExtResource("1_iotu2")
+font_size = 14

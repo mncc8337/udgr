@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3fbl6ai8k200"]
+
+[ext_resource type="Script" path="res://scripts/box_spawner.gd" id="1_nyb76"]
+
+[node name="box_spawner" type="Node3D"]
+script = ExtResource("1_nyb76")
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true

@@ -1,0 +1,378 @@
+[gd_scene load_steps=33 format=3 uid="uid://nnjmms1y5v4l"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_ccl51"]
+[ext_resource type="PackedScene" uid="uid://cm4c5xysnttlv" path="res://scenes/light-bulb.tscn" id="3_djiv6"]
+[ext_resource type="Script" path="res://scripts/follow_window_size.gd" id="4_p0a0y"]
+[ext_resource type="PackedScene" uid="uid://befsblxo1kr4s" path="res://scenes/camera.tscn" id="5_k05cb"]
+[ext_resource type="Shader" path="res://shaders/dithering.gdshader" id="6_ssqkf"]
+[ext_resource type="Shader" path="res://shaders/vhs.gdshader" id="7_cnw40"]
+[ext_resource type="PackedScene" uid="uid://cecnee3pqjlk7" path="res://scenes/player.tscn" id="8_bp4hv"]
+[ext_resource type="PackedScene" uid="uid://bla3dq72k024l" path="res://scenes/assasult_rifle.tscn" id="9_rai2g"]
+[ext_resource type="PackedScene" uid="uid://cckmsw5oeppji" path="res://scenes/sub_machine_gun.tscn" id="9_tmbis"]
+[ext_resource type="Script" path="res://scripts/gun.gd" id="10_8wssb"]
+[ext_resource type="PackedScene" uid="uid://b3fbl6ai8k200" path="res://scenes/box_spawner.tscn" id="10_eao4d"]
+[ext_resource type="PackedScene" uid="uid://t3b2d50e5a4a" path="res://scenes/wand.tscn" id="11_n8f41"]
+[ext_resource type="LabelSettings" uid="uid://bu0rd8q5qya7e" path="res://label_setting.tres" id="12_yh4yd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wcd6e"]
+size = Vector3(100, 0.1, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmloq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5t7vu"]
+size = Vector3(100, 0.1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yjw4l"]
+size = Vector3(100, 0.1, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gsbyw"]
+size = Vector2(100, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ah24q"]
+shader = ExtResource("6_ssqkf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5r7nx"]
+shader = ExtResource("7_cnw40")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = false
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 1.0
+shader_parameter/roll_variation = 1.68
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.0
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.03
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.396
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tboei"]
+albedo_color = Color(0.470588, 0.639216, 1, 1)
+roughness = 0.0
+emission_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_8ubnk"]
+material = SubResource("StandardMaterial3D_tboei")
+radial_segments = 5
+rings = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ouvlo"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_skj8c"]
+size = Vector3(0.505428, 0.199901, 0.137)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8l2h2"]
+size = Vector3(0.709172, 0.0602679, 0.137)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dtl6l"]
+size = Vector3(0.12063, 0.210771, 0.137)
+
+[sub_resource type="Animation" id="Animation_8wqsq"]
+resource_name = "reloading"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dsd:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 6.28319)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2xwd"]
+_data = {
+"reloading": SubResource("Animation_8wqsq")
+}
+
+[sub_resource type="Environment" id="Environment_ct120"]
+background_energy_multiplier = 0.3
+ambient_light_color = Color(0.345098, 0.654902, 1, 1)
+
+[sub_resource type="Animation" id="Animation_cqxi3"]
+length = 7.0
+
+[sub_resource type="Animation" id="Animation_nct8g"]
+resource_name = "test"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("test_shader:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(6.28319, 6.28319, 6.28319)]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("test_shader")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.5, 1, 0.487998, 2.21698, -1.43508, 4.5, 1, 0.488, 3.217, -1.435, 5.5, 1, 0.488, 3.217, -1.435, 9.5, 1, 0.488, 2.217, -1.435)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y1wg7"]
+_data = {
+"RESET": SubResource("Animation_cqxi3"),
+"test": SubResource("Animation_nct8g")
+}
+
+[node name="main" type="Node"]
+script = ExtResource("1_ccl51")
+
+[node name="map" type="Node" parent="."]
+
+[node name="walls" type="Node" parent="map"]
+
+[node name="floor" type="StaticBody3D" parent="map/walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map/walls/floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.95, 0)
+shape = SubResource("BoxShape3D_wcd6e")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="map/walls/floor"]
+size = Vector3(100, 10, 5)
+material = SubResource("StandardMaterial3D_hmloq")
+
+[node name="floor2" type="StaticBody3D" parent="map/walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5049, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map/walls/floor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.95, 0)
+shape = SubResource("BoxShape3D_5t7vu")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="map/walls/floor2"]
+size = Vector3(100, 10, 5)
+material = SubResource("StandardMaterial3D_hmloq")
+
+[node name="wall1" type="StaticBody3D" parent="map/walls"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 4.369, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map/walls/wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+shape = SubResource("BoxShape3D_yjw4l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="map/walls/wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+mesh = SubResource("PlaneMesh_gsbyw")
+
+[node name="wall2" type="StaticBody3D" parent="map/walls"]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 4.369, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map/walls/wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+shape = SubResource("BoxShape3D_yjw4l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="map/walls/wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+mesh = SubResource("PlaneMesh_gsbyw")
+
+[node name="lights" type="Node" parent="map"]
+
+[node name="light-bulb" parent="map/lights" instance=ExtResource("3_djiv6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.18395, 0)
+
+[node name="svc" type="SubViewportContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+stretch = true
+stretch_shrink = 3
+script = ExtResource("4_p0a0y")
+
+[node name="sv" type="SubViewport" parent="svc"]
+handle_input_locally = false
+size = Vector2i(384, 216)
+render_target_update_mode = 4
+
+[node name="Camera3D" parent="svc/sv" node_paths=PackedStringArray("target") instance=ExtResource("5_k05cb")]
+transform = Transform3D(1, 0, 0, 0, 0.992546, 0.121869, 0, -0.121869, 0.992546, 0, 2.03039, 4.20929)
+target = NodePath("../../../player")
+
+[node name="dithering" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_ah24q")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+script = ExtResource("4_p0a0y")
+
+[node name="vhs" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_5r7nx")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+script = ExtResource("4_p0a0y")
+
+[node name="player" parent="." instance=ExtResource("8_bp4hv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.90432, 1.8782, 0)
+
+[node name="gun_holder" type="Node3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.36425)
+
+[node name="box_holder" type="Node3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.541454, 0)
+
+[node name="real_pos" type="Node3D" parent="player/box_holder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45996, 0, 0)
+
+[node name="test_shader" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.0399899, 0.866604, -0.497392, -0.497392, 0.448997, 0.742296, 0.866604, 0.217714, 0.448997, 1.16575, 5.08305, 0.112773)
+snap = 0.0001
+mesh = SubResource("SphereMesh_8ubnk")
+
+[node name="ar" parent="." instance=ExtResource("9_rai2g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88304, 1.30082, -0.378797)
+
+[node name="sub_machine_gun" parent="." instance=ExtResource("9_tmbis")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.44601, 3.3455, 0)
+
+[node name="sniper" type="RigidBody3D" parent="." groups=["gun"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5143, 1.30082, -0.378797)
+mass = 3.0
+script = ExtResource("10_8wssb")
+gun_name = "siu"
+damage = 120.0
+max_recoil = 0.5
+inaccuracy = 0.0
+firing_speed = 1.3
+magazine_size = 7
+
+[node name="dsd" type="CSGCombiner3D" parent="sniper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04883, 0.104297, 0)
+material_override = SubResource("StandardMaterial3D_ouvlo")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="sniper/dsd"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180179, 0.0223745, 0)
+size = Vector3(1.424, 0.211, 0.076)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="sniper/dsd"]
+transform = Transform3D(0.969158, 0.246441, 0, -0.246441, 0.969158, 0, 0, 0, 1, -0.490464, -0.222648, 1.19209e-07)
+size = Vector3(0.158154, 0.355, 0.038)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="sniper/dsd"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.503779, -0.0191618, 0)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="sniper/dsd/CSGCombiner3D"]
+transform = Transform3D(0.94769, -0.319191, 0, 0.319191, 0.94769, 0, 0, 0, 1, -1.34295, -0.114095, 0)
+size = Vector3(0.776, 0.211, 0.076)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="sniper/dsd/CSGCombiner3D"]
+transform = Transform3D(0.901561, -0.432652, 0, 0.432652, 0.901561, 0, 0, 0, 1, -1.19776, -0.250052, 0)
+operation = 2
+size = Vector3(1, 0.305, 0.156)
+
+[node name="col1" type="CollisionShape3D" parent="sniper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22671, 0.12521, 0)
+shape = SubResource("BoxShape3D_skj8c")
+
+[node name="col2" type="CollisionShape3D" parent="sniper"]
+transform = Transform3D(0.947768, -0.318959, 0, 0.318959, 0.947768, 0, 0, 0, 1, 0.153356, -0.0214289, -1.19209e-07)
+shape = SubResource("BoxShape3D_8l2h2")
+
+[node name="col3" type="CollisionShape3D" parent="sniper"]
+transform = Transform3D(0.969016, 0.246999, 0, -0.246999, 0.969016, 0, 0, 0, 1, 0.553328, -0.1344, -1.19209e-07)
+shape = SubResource("BoxShape3D_dtl6l")
+
+[node name="flash" type="SpotLight3D" parent="sniper"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.00969, 0.179091, 0)
+visible = false
+light_color = Color(1, 0.603922, 0, 1)
+light_energy = 5.0
+spot_range = 1000.0
+spot_angle = 73.97
+
+[node name="flash_timer" type="Timer" parent="sniper"]
+one_shot = true
+
+[node name="raycast" type="RayCast3D" parent="sniper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97194, 0.194, 0)
+target_position = Vector3(10000, 0, 0)
+
+[node name="start" type="Node3D" parent="sniper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.582283, 0.194, 0)
+
+[node name="reload_timer" type="Timer" parent="sniper"]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="sniper"]
+libraries = {
+"": SubResource("AnimationLibrary_n2xwd")
+}
+
+[node name="Timer" type="Timer" parent="sniper"]
+one_shot = true
+
+[node name="wand" parent="." instance=ExtResource("11_n8f41")]
+
+[node name="box_spawner" parent="." instance=ExtResource("10_eao4d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.80991, 5.19527, 0.0183089)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ct120")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "test"
+libraries = {
+"": SubResource("AnimationLibrary_y1wg7")
+}
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Panel" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -329.143
+offset_top = -92.57
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="gun_name" type="Label" parent="UI/Panel"]
+layout_mode = 2
+offset_left = 59.0
+offset_top = 25.0
+offset_right = 228.0
+offset_bottom = 67.0
+text = "some name"
+label_settings = ExtResource("12_yh4yd")
+vertical_alignment = 1
+
+[node name="ammo" type="Label" parent="UI/Panel"]
+layout_mode = 2
+offset_left = 232.0
+offset_top = 25.0
+offset_right = 329.0
+offset_bottom = 67.0
+auto_translate = false
+text = "69/420"
+label_settings = ExtResource("12_yh4yd")
+horizontal_alignment = 2
+vertical_alignment = 1

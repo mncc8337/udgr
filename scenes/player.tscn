@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cecnee3pqjlk7"]
+
+[ext_resource type="Script" path="res://scripts/player-movement.gd" id="1_vitqt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a33mf"]
+size = Vector3(0.466, 2.014, 0.537)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwhi2"]
+albedo_color = Color(0.933333, 0.380392, 0.356863, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fe52b"]
+albedo_color = Color(0.933333, 0.380392, 0.356863, 1)
+
+[node name="player" type="CharacterBody3D" groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21556, 0)
+script = ExtResource("1_vitqt")
+
+[node name="collider" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_a33mf")
+
+[node name="mesh" type="CSGCombiner3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh"]
+size = Vector3(0.46617, 2.01357, 0.537041)
+material = SubResource("StandardMaterial3D_dwhi2")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.205728, 0.393152, 0)
+operation = 2
+size = Vector3(0.157672, 0.661756, 0.627032)
+material = SubResource("StandardMaterial3D_fe52b")

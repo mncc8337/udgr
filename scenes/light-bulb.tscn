@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm4c5xysnttlv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgijj"]
+albedo_color = Color(0.270588, 0.270588, 0.270588, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sc01k"]
+shading_mode = 0
+albedo_color = Color(0.415686, 0.72549, 1, 0.682353)
+heightmap_scale = 12.074
+
+[node name="light-bulb" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0527266, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.183079, 0)
+radius = 0.3
+height = 0.239
+sides = 7
+smooth_faces = false
+material = SubResource("StandardMaterial3D_fgijj")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0300593, 0)
+radius = 0.24
+height = 0.2
+sides = 7
+smooth_faces = false
+material = SubResource("StandardMaterial3D_sc01k")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.162111, 0)
+light_color = Color(0.729412, 0.929412, 1, 1)
+light_energy = 5.0
+omni_range = 20.0

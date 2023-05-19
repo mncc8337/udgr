@@ -1,0 +1,232 @@
+[gd_scene load_steps=9 format=3 uid="uid://bla3dq72k024l"]
+
+[ext_resource type="Script" path="res://scripts/gun.gd" id="1_q3iq3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8utwe"]
+albedo_color = Color(0.419608, 0.447059, 0.509804, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_skj8c"]
+size = Vector3(1.424, 0.211, 0.076)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8l2h2"]
+size = Vector3(0.776, 0.211, 0.076)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dtl6l"]
+size = Vector3(0.158, 0.355, 0.038)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m4mpb"]
+size = Vector3(0.158, 0.06, 0.038)
+
+[sub_resource type="Animation" id="Animation_ssbwn"]
+resource_name = "reloading"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mesh/mag:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 1.1, 1.9, 2.6, 2.8),
+"transitions": PackedFloat32Array(1, 1, 0.420448, 15.352, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, -0.3, 0), Vector3(-1, 0.417, -0.6), Vector3(-1, 0.417, -0.6), Vector3(0, -0.3, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mesh/mag:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 1.1, 1.9, 2.6, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.523599, 0, 0), Vector3(0.523599, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("mesh:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.785398), Vector3(0, 0, 0.785398), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("mesh:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.04883, 0.104297, 0), Vector3(1.049, 0.65, 0), Vector3(1.049, 0.65, 0), Vector3(1.04883, 0.104297, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("mesh/mag:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ij36q"]
+_data = {
+"reloading": SubResource("Animation_ssbwn")
+}
+
+[node name="assasult_rifle" type="RigidBody3D" groups=["gun"]]
+mass = 3.0
+script = ExtResource("1_q3iq3")
+gun_name = "idk"
+magazine_size = 30
+
+[node name="mesh" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04883, 0.104297, 0)
+material_override = SubResource("StandardMaterial3D_8utwe")
+
+[node name="handle" type="CSGBox3D" parent="mesh"]
+transform = Transform3D(0.969158, 0.246441, 0, -0.246441, 0.969158, 0, 0, 0, 1, -0.490464, -0.222648, 1.19209e-07)
+size = Vector3(0.158154, 0.355, 0.038)
+
+[node name="stock" type="CSGCombiner3D" parent="mesh"]
+transform = Transform3D(0.998357, 0.0573027, 0, -0.0573027, 0.998357, 0, 0, 0, 1, -0.863479, -0.120055, 0)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="mesh/stock"]
+transform = Transform3D(0.94769, -0.319191, 0, 0.319191, 0.94769, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(0.776, 0.211, 0.076)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh/stock"]
+transform = Transform3D(0.894443, -0.447181, 0, 0.447181, 0.894443, 0, 0, 0, 1, 0.0725877, -0.122684, 0)
+operation = 2
+size = Vector3(0.80758, 0.188972, 0.156)
+
+[node name="mag" type="CSGCombiner3D" parent="mesh"]
+
+[node name="handle2" type="CSGBox3D" parent="mesh/mag"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0918752, -0.0663436, 1.19209e-07)
+size = Vector3(0.158, 0.131669, 0.038)
+
+[node name="handle3" type="CSGBox3D" parent="mesh/mag"]
+transform = Transform3D(0.99567, -0.0929614, 0, 0.0929614, 0.99567, 0, 0, 0, 1, -0.0894493, -0.155059, 1.19209e-07)
+size = Vector3(0.158, 0.06, 0.038)
+
+[node name="handle4" type="CSGBox3D" parent="mesh/mag"]
+transform = Transform3D(0.982935, -0.183951, 0, 0.183951, 0.982935, 0, 0, 0, 1, -0.0817757, -0.206977, 1.19209e-07)
+size = Vector3(0.158, 0.06, 0.038)
+
+[node name="handle5" type="CSGBox3D" parent="mesh/mag"]
+transform = Transform3D(0.961741, -0.273959, 0, 0.273959, 0.961741, 0, 0, 0, 1, -0.0689758, -0.257221, 1.19209e-07)
+size = Vector3(0.158, 0.06, 0.038)
+
+[node name="handle6" type="CSGBox3D" parent="mesh/mag"]
+transform = Transform3D(0.932324, -0.361625, 0, 0.361625, 0.932324, 0, 0, 0, 1, -0.0523299, -0.306346, 1.19209e-07)
+size = Vector3(0.158, 0.06, 0.038)
+
+[node name="handle7" type="CSGBox3D" parent="mesh/mag"]
+transform = Transform3D(0.894934, -0.446198, 0, 0.446198, 0.894934, 0, 0, 0, 1, -0.0312182, -0.354253, 1.19209e-07)
+size = Vector3(0.158, 0.06, 0.038)
+
+[node name="handle8" type="CSGBox3D" parent="mesh/mag"]
+transform = Transform3D(0.849893, -0.526956, 0, 0.526956, 0.849893, 0, 0, 0, 1, -0.00572789, -0.399453, 1.19209e-07)
+size = Vector3(0.158, 0.06, 0.038)
+
+[node name="handle9" type="CSGBox3D" parent="mesh/mag"]
+transform = Transform3D(0.797584, -0.603208, 0, 0.603208, 0.797584, 0, 0, 0, 1, 0.0247216, -0.442894, 1.19209e-07)
+size = Vector3(0.158, 0.06, 0.038)
+
+[node name="body" type="CSGCombiner3D" parent="mesh"]
+
+[node name="body" type="CSGBox3D" parent="mesh/body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180179, 0.0223745, 0)
+size = Vector3(1.424, 0.211, 0.076)
+
+[node name="body2" type="CSGBox3D" parent="mesh/body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01992, 0.0804934, 0)
+size = Vector3(0.297, 0.039, 0.076)
+
+[node name="handle10" type="CSGBox3D" parent="mesh/body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0918752, -0.112494, 1.19209e-07)
+size = Vector3(0.171, 0.069, 0.053)
+
+[node name="col1" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22736, 0.127, 0)
+shape = SubResource("BoxShape3D_skj8c")
+
+[node name="col2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.964557, -0.263873, 0, 0.263873, 0.964557, 0, 0, 0, 1, 0.183005, -0.0163171, -1.19209e-07)
+shape = SubResource("BoxShape3D_8l2h2")
+
+[node name="col3" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.969016, 0.246999, 0, -0.246999, 0.969016, 0, 0, 0, 1, 0.557838, -0.118293, -1.19209e-07)
+shape = SubResource("BoxShape3D_dtl6l")
+
+[node name="col4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.957979, 0.00207255, -1.19209e-07)
+shape = SubResource("BoxShape3D_m4mpb")
+
+[node name="col5" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.995725, -0.0923706, 0, 0.0923706, 0.995725, 0, 0, 0, 1, 0.959576, -0.0503512, -1.19209e-07)
+shape = SubResource("BoxShape3D_m4mpb")
+
+[node name="col6" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.982936, -0.183951, 0, 0.183951, 0.982936, 0, 0, 0, 1, 0.966663, -0.101892, -1.19209e-07)
+shape = SubResource("BoxShape3D_m4mpb")
+
+[node name="col7" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.961742, -0.273959, 0, 0.273959, 0.961742, 0, 0, 0, 1, 0.980458, -0.152807, -1.19209e-07)
+shape = SubResource("BoxShape3D_m4mpb")
+
+[node name="col8" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.932324, -0.361625, 0, 0.361625, 0.932324, 0, 0, 0, 1, 0.997103, -0.201932, -1.19209e-07)
+shape = SubResource("BoxShape3D_m4mpb")
+
+[node name="col9" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.894935, -0.446198, 0, 0.446198, 0.894935, 0, 0, 0, 1, 1.01862, -0.250651, -1.19209e-07)
+shape = SubResource("BoxShape3D_m4mpb")
+
+[node name="col10" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.849893, -0.526956, 0, 0.526956, 0.849893, 0, 0, 0, 1, 1.0446, -0.296528, -1.19209e-07)
+shape = SubResource("BoxShape3D_m4mpb")
+
+[node name="col11" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.797584, -0.603208, 0, 0.603208, 0.797584, 0, 0, 0, 1, 1.07465, -0.339563, -1.19209e-07)
+shape = SubResource("BoxShape3D_m4mpb")
+
+[node name="flash" type="SpotLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.20737, 0.184407, 0)
+visible = false
+light_color = Color(1, 0.603922, 0, 1)
+light_energy = 5.0
+spot_range = 1000.0
+spot_angle = 75.0
+
+[node name="flash_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="raycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.22046, 0.186431, 0)
+target_position = Vector3(10000, 0, 0)
+hit_from_inside = true
+
+[node name="start" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.702043, 0.186431, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ij36q")
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

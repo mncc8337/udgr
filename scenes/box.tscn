@@ -1,0 +1,162 @@
+[gd_scene load_steps=11 format=3 uid="uid://dfa5hiar44uop"]
+
+[ext_resource type="Script" path="res://scripts/box.gd" id="1_g8hh3"]
+[ext_resource type="Texture2D" uid="uid://bnsfg0yjqg4c2" path="res://imgs/box.png" id="2_x4a4x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yip5e"]
+albedo_color = Color(1, 0.615686, 0.321569, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dr4s"]
+albedo_color = Color(1, 0.615686, 0.321569, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_alywm"]
+albedo_color = Color(1, 0.615686, 0.321569, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dwmeq"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ihbix"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 154.66
+gravity = Vector3(0, -50, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+angular_velocity_min = 16.55
+angular_velocity_max = 115.86
+linear_accel_min = 11.49
+linear_accel_max = 11.49
+radial_accel_min = 16.09
+radial_accel_max = 16.09
+tangential_accel_min = -0.37
+tangential_accel_max = 0.19
+angle_min = -364.1
+angle_max = 132.4
+scale_min = 0.0
+scale_max = 2.0
+anim_speed_min = 4.78
+anim_speed_max = 4.78
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crf5c"]
+albedo_color = Color(1, 0.623529, 0.341176, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bkxq7"]
+material = SubResource("StandardMaterial3D_crf5c")
+size = Vector3(0.214, 0.199, 0.191)
+
+[sub_resource type="PrismMesh" id="PrismMesh_8nyxt"]
+material = SubResource("StandardMaterial3D_crf5c")
+size = Vector3(0.274, 0.183, 0.242)
+
+[node name="box" type="RigidBody3D" groups=["box"]]
+max_contacts_reported = 8
+contact_monitor = true
+script = ExtResource("1_g8hh3")
+preview_img = ExtResource("2_x4a4x")
+
+[node name="mesh" type="CSGCombiner3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh"]
+material = SubResource("StandardMaterial3D_yip5e")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.454189)
+operation = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh/CSGCombiner3D"]
+size = Vector3(0.8, 0.8, 0.1)
+material = SubResource("StandardMaterial3D_6dr4s")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="mesh/CSGCombiner3D"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+operation = 2
+size = Vector3(1.166, 0.1, 0.105)
+material = SubResource("StandardMaterial3D_alywm")
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, -0.454)
+operation = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh/CSGCombiner3D2"]
+size = Vector3(0.8, 0.8, 0.1)
+material = SubResource("StandardMaterial3D_6dr4s")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="mesh/CSGCombiner3D2"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+operation = 2
+size = Vector3(1.166, 0.1, 0.105)
+material = SubResource("StandardMaterial3D_alywm")
+
+[node name="CSGCombiner3D3" type="CSGCombiner3D" parent="mesh"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.454, 0, 0)
+operation = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh/CSGCombiner3D3"]
+size = Vector3(0.8, 0.8, 0.1)
+material = SubResource("StandardMaterial3D_6dr4s")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="mesh/CSGCombiner3D3"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+operation = 2
+size = Vector3(1.166, 0.1, 0.105)
+material = SubResource("StandardMaterial3D_alywm")
+
+[node name="CSGCombiner3D4" type="CSGCombiner3D" parent="mesh"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.454, 0, 0)
+operation = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh/CSGCombiner3D4"]
+size = Vector3(0.8, 0.8, 0.1)
+material = SubResource("StandardMaterial3D_6dr4s")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="mesh/CSGCombiner3D4"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+operation = 2
+size = Vector3(1.166, 0.1, 0.105)
+material = SubResource("StandardMaterial3D_alywm")
+
+[node name="CSGCombiner3D5" type="CSGCombiner3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.454, 0)
+operation = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh/CSGCombiner3D5"]
+size = Vector3(0.8, 0.8, 0.1)
+material = SubResource("StandardMaterial3D_6dr4s")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="mesh/CSGCombiner3D5"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+operation = 2
+size = Vector3(1.166, 0.1, 0.105)
+material = SubResource("StandardMaterial3D_alywm")
+
+[node name="CSGCombiner3D6" type="CSGCombiner3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.454, 0)
+operation = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh/CSGCombiner3D6"]
+size = Vector3(0.8, 0.8, 0.1)
+material = SubResource("StandardMaterial3D_6dr4s")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="mesh/CSGCombiner3D6"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+operation = 2
+size = Vector3(1.166, 0.1, 0.105)
+material = SubResource("StandardMaterial3D_alywm")
+
+[node name="collider" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_dwmeq")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 32
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+collision_base_size = 29.04
+process_material = SubResource("ParticleProcessMaterial_ihbix")
+draw_passes = 2
+draw_pass_1 = SubResource("BoxMesh_bkxq7")
+draw_pass_2 = SubResource("PrismMesh_8nyxt")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

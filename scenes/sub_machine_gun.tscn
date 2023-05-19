@@ -1,0 +1,157 @@
+[gd_scene load_steps=8 format=3 uid="uid://cckmsw5oeppji"]
+
+[ext_resource type="Script" path="res://scripts/gun.gd" id="1_4tdmp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_opexq"]
+albedo_color = Color(0.372549, 0.443137, 0.521569, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_skj8c"]
+size = Vector3(0.505428, 0.199901, 0.137)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8l2h2"]
+size = Vector3(0.709172, 0.0602679, 0.137)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dtl6l"]
+size = Vector3(0.12063, 0.210771, 0.137)
+
+[sub_resource type="Animation" id="Animation_0sngs"]
+resource_name = "reloading"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mesh/mag:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.7, 1.3, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.425026, -0.175931, 1.19209e-07), Vector3(-0.425026, -0.175931, 1.19209e-07), Vector3(-0.425, -0.5, 0), Vector3(-1.016, 0.266, -0.728), Vector3(-1.016, 0.266, -0.728), Vector3(-0.425, -0.5, 0), Vector3(-0.425026, -0.175931, 1.19209e-07)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.12445, 0.104297, 0), Vector3(1.124, 0.6, 0), Vector3(1.124, 0.6, 0), Vector3(1.124, 0.104, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("mesh:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.785398), Vector3(0, 0, 0.785398), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("mesh/mag:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.75, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2lhhk"]
+_data = {
+"reloading": SubResource("Animation_0sngs")
+}
+
+[node name="sub_machine_gun" type="RigidBody3D" groups=["gun"]]
+mass = 2.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0.5, 0.15, 0)
+script = ExtResource("1_4tdmp")
+gun_name = "uzi"
+damage = 29.0
+inaccuracy = 0.1
+firing_speed = 0.06
+magazine_size = 25
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="mesh" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12445, 0.104297, 0)
+material_override = SubResource("StandardMaterial3D_opexq")
+
+[node name="body" type="CSGBox3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.299164, 0.0287622, 0)
+size = Vector3(0.485, 0.188, 0.111)
+
+[node name="handle" type="CSGBox3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425026, -0.136764, 1.19209e-07)
+size = Vector3(0.135816, 0.226, 0.078)
+
+[node name="mag" type="CSGBox3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425026, -0.175931, 1.19209e-07)
+size = Vector3(0.081973, 0.32575, 0.054)
+
+[node name="muzzel" type="CSGBox3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00684071, 0.0601163, 1.19209e-07)
+size = Vector3(0.104746, 0.0361731, 0.038)
+
+[node name="stock" type="CSGCombiner3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.503779, -0.0191618, 0)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="mesh/stock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34295, 0.0066154, 0)
+size = Vector3(0.776, 0.211, 0.076)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh/stock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27869, -0.0888201, 0)
+operation = 2
+size = Vector3(0.698642, 0.305, 0.156)
+
+[node name="col1" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.825338, 0.133322, 0)
+shape = SubResource("BoxShape3D_skj8c")
+
+[node name="col2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0.238711, 0.17164, -1.19209e-07)
+shape = SubResource("BoxShape3D_8l2h2")
+
+[node name="col3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.700335, -0.0484114, -1.19209e-07)
+shape = SubResource("BoxShape3D_dtl6l")
+
+[node name="col4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0524693, 0.0797602, -1.19209e-07)
+shape = SubResource("BoxShape3D_dtl6l")
+
+[node name="flash" type="SpotLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.18649, 0.162867, 0)
+visible = false
+light_color = Color(1, 0.603922, 0, 1)
+light_energy = 5.0
+spot_range = 1000.0
+spot_angle = 73.97
+
+[node name="flash_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="raycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18281, 0.163174, 0)
+target_position = Vector3(10000, 0, 0)
+
+[node name="start" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.545599, 0.163174, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2lhhk")
+}
