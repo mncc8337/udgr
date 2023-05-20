@@ -6,12 +6,13 @@ extends RigidBody3D
 @onready var trail = preload("res://scenes/trail.tscn")
 
 @export var gun_name: String
-@export var between_firing_animation = ""
 @export var damage = 41.0
 @export var max_recoil = .1 # time PI/2
 @export var inaccuracy = 0.01
 @export var firing_speed = .1
 @export var magazine_size = 40
+@export var audio_stream: AudioStream
+@export var between_firing_animation = "no"
 
 var is_holding = false
 var magazine: int
@@ -31,7 +32,6 @@ func _on_finish_reloaded(anim_name):
 	if is_holding and reloading_animation:
 		magazine = magazine_size
 		$AnimationPlayer.stop()
-		print("finish")
 		# player
 		get_parent().get_parent().is_reloading = false
 		ammo_text.text = str(magazine) + '/' + str(magazine_size)
@@ -61,6 +61,19 @@ func toggle_holding(hold):
 		collision_mask = 1
 		is_holding = false
 		freeze = false
+
+func play_firing_sound():
+	if audio_stream == null: return
+	
+	var audioStreamPlayer = AudioStreamPlayer3D.new();
+	MAIN.add_child(audioStreamPlayer)
+	audioStreamPlayer.stream = audio_stream
+	audioStreamPlayer.global_position = $firing_sound_pos.global_position
+	audioStreamPlayer.pitch_scale = MAIN.rng.randf_range(0.9, 1.1)
+	audioStreamPlayer.volume_db = .8
+	
+	audioStreamPlayer.finished.connect(audioStreamPlayer.queue_free)
+	audioStreamPlayer.play()
 
 func _physics_process(_delta):
 	position.z = 0
@@ -95,34 +108,40 @@ func _process(delta):
 		var angle = MAIN.rng.randf_range(-inaccuracy, inaccuracy)
 		$raycast.rotation.z = angle # this make bullet inaccurate
 		$raycast.force_raycast_update()
+
 		var point = $raycast.get_collision_point()
 		if not $raycast.is_colliding():
 			var dir = ($raycast.global_position - $start.global_position) * 400
 			point.x = $raycast.global_position.x + dir.x
 			point.y = $raycast.global_position.y + dir.y
+			
 		var obj = $raycast.get_collider()
 		if obj != null:
 			if obj.is_in_group("box"):
 				obj.hit_received.emit(damage)
+
 		var new_trail = trail.instantiate()
 		MAIN.add_child(new_trail)
 		new_trail.startpoint = $raycast.global_position
 		new_trail.endpoint = point
 		new_trail.start(0.2)
+
 		$raycast.rotation.z = 0
 		$flash.visible = true
 		$flash_timer.start()
-		# add recoil
+		play_firing_sound()
+
 		var recoil = MAIN.rng.randf_range(max_recoil * PI/2 * 0.5, max_recoil * PI/2)
 		rotation.z += recoil
 		rotation.z = min(rotation.z, PI/2)
+		
 		magazine -= 1
 		if magazine == 0:
 			reload()
 		else:
 			ammo_text.text = str(magazine) + "/" + str(magazine_size)
 			$Timer.start()
-			if between_firing_animation != "":
+			if between_firing_animation != "no":
 				$AnimationPlayer.play(between_firing_animation)
 			
 	if is_holding:

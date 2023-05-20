@@ -37,6 +37,7 @@ func pick_gun():
 			$gun_holder.remove_child(holding)
 			MAIN.add_child(holding)
 			holding.get_node("AnimationPlayer").stop()
+			is_reloading = false
 		elif holding.is_in_group("box"):
 			angle = $box_holder.rotation.z
 			if rotation.y < -PI/2:
