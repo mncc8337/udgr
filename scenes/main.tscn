@@ -12,7 +12,6 @@
 [ext_resource type="Script" path="res://scripts/gun.gd" id="10_8wssb"]
 [ext_resource type="PackedScene" uid="uid://b3fbl6ai8k200" path="res://scenes/box_spawner.tscn" id="10_eao4d"]
 [ext_resource type="PackedScene" uid="uid://t3b2d50e5a4a" path="res://scenes/wand.tscn" id="11_n8f41"]
-[ext_resource type="LabelSettings" uid="uid://bu0rd8q5qya7e" path="res://label_setting.tres" id="12_yh4yd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wcd6e"]
 size = Vector3(100, 0.1, 5)
@@ -64,6 +63,8 @@ emission_enabled = true
 material = SubResource("StandardMaterial3D_tboei")
 radial_segments = 5
 rings = 3
+
+[sub_resource type="AudioStream" id="AudioStream_1bhbk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ouvlo"]
 albedo_color = Color(1, 0, 0, 1)
@@ -236,6 +237,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.541454, 0)
 [node name="real_pos" type="Node3D" parent="player/box_holder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45996, 0, 0)
 
+[node name="AudioListener3D" type="AudioListener3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.664706, 0)
+current = true
+
 [node name="test_shader" type="CSGMesh3D" parent="."]
 transform = Transform3D(0.0399899, 0.866604, -0.497392, -0.497392, 0.448997, 0.742296, 0.866604, 0.217714, 0.448997, 1.16575, 5.08305, 0.112773)
 snap = 0.0001
@@ -243,9 +248,18 @@ mesh = SubResource("SphereMesh_8ubnk")
 
 [node name="ar" parent="." instance=ExtResource("9_rai2g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88304, 1.30082, -0.378797)
+between_firing_animation = "0"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ar"]
+process_mode = 4
+stream = SubResource("AudioStream_1bhbk")
 
 [node name="sub_machine_gun" parent="." instance=ExtResource("9_tmbis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.44601, 3.3455, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="sub_machine_gun"]
+process_mode = 4
+stream = SubResource("AudioStream_1bhbk")
 
 [node name="sniper" type="RigidBody3D" parent="." groups=["gun"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5143, 1.30082, -0.378797)
@@ -263,11 +277,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04883, 0.104297, 0)
 material_override = SubResource("StandardMaterial3D_ouvlo")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="sniper/dsd"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180179, 0.0223745, 0)
-size = Vector3(1.424, 0.211, 0.076)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.193358, 0.0223743, 0)
+size = Vector3(1.424, 0.211, 0.2)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="sniper/dsd/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42196, 0.0223688, 0.0145665)
+size = Vector3(2, 0.1, 0.1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="sniper/dsd"]
+transform = Transform3D(0.878534, 0.477681, 0, -0.477681, 0.878534, 0, 0, 0, 1, 0.219952, -0.0945745, 2.38419e-07)
+size = Vector3(0.158154, 0.355, 0.038)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="sniper/dsd"]
-transform = Transform3D(0.969158, 0.246441, 0, -0.246441, 0.969158, 0, 0, 0, 1, -0.490464, -0.222648, 1.19209e-07)
+transform = Transform3D(0.642788, 0.766045, 0, -0.766045, 0.642788, 0, 0, 0, 1, -0.638381, -0.195047, 1.19209e-07)
 size = Vector3(0.158154, 0.355, 0.038)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="sniper/dsd"]
@@ -323,7 +345,15 @@ libraries = {
 [node name="Timer" type="Timer" parent="sniper"]
 one_shot = true
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="sniper"]
+process_mode = 4
+stream = SubResource("AudioStream_1bhbk")
+
 [node name="wand" parent="." instance=ExtResource("11_n8f41")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="wand"]
+process_mode = 4
+stream = SubResource("AudioStream_1bhbk")
 
 [node name="box_spawner" parent="." instance=ExtResource("10_eao4d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.80991, 5.19527, 0.0183089)
@@ -362,7 +392,6 @@ offset_top = 25.0
 offset_right = 228.0
 offset_bottom = 67.0
 text = "some name"
-label_settings = ExtResource("12_yh4yd")
 vertical_alignment = 1
 
 [node name="ammo" type="Label" parent="UI/Panel"]
@@ -373,6 +402,5 @@ offset_right = 329.0
 offset_bottom = 67.0
 auto_translate = false
 text = "69/420"
-label_settings = ExtResource("12_yh4yd")
 horizontal_alignment = 2
 vertical_alignment = 1
