@@ -12,7 +12,6 @@ size = Vector3(1.661, 0.111, 0.076)
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1eoyt"]
 
 [node name="wand" type="RigidBody3D" groups=["gun"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5353, 1.30082, -0.378797)
 mass = 3.0
 script = ExtResource("1_0bpl7")
 gun_name = "epic wand"
@@ -57,3 +56,6 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="firing_sound_pos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15677, 0, 0)

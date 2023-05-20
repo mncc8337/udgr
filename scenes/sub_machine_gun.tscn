@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cckmsw5oeppji"]
+[gd_scene load_steps=9 format=3 uid="uid://yaoh2ohalhm3"]
 
 [ext_resource type="Script" path="res://scripts/gun.gd" id="1_4tdmp"]
+[ext_resource type="AudioStream" uid="uid://8duw2nn4xksd" path="res://sfx/submachine.mp3" id="2_bb66c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_opexq"]
 albedo_color = Color(0.372549, 0.443137, 0.521569, 1)
@@ -81,9 +82,7 @@ damage = 29.0
 inaccuracy = 0.1
 firing_speed = 0.06
 magazine_size = 25
-
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
+audio_stream = ExtResource("2_bb66c")
 
 [node name="mesh" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12445, 0.104297, 0)
@@ -134,7 +133,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0524693, 0.0797602, -1.192
 shape = SubResource("BoxShape3D_dtl6l")
 
 [node name="flash" type="SpotLight3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.18649, 0.162867, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.177, 0.162867, 0)
 visible = false
 light_color = Color(1, 0.603922, 0, 1)
 light_energy = 5.0
@@ -145,7 +144,7 @@ spot_angle = 73.97
 one_shot = true
 
 [node name="raycast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18281, 0.163174, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1751, 0.163174, 0)
 target_position = Vector3(10000, 0, 0)
 
 [node name="start" type="Node3D" parent="."]
@@ -155,3 +154,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.545599, 0.163174, 0)
 libraries = {
 "": SubResource("AnimationLibrary_2lhhk")
 }
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="firing_sound_pos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17796, 0.164293, 0)

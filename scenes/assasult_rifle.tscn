@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bla3dq72k024l"]
+[gd_scene load_steps=10 format=3 uid="uid://bla3dq72k024l"]
 
 [ext_resource type="Script" path="res://scripts/gun.gd" id="1_q3iq3"]
+[ext_resource type="AudioStream" uid="uid://d3bpnc1c0jg8l" path="res://sfx/rifle.mp3" id="2_6u2dc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8utwe"]
 albedo_color = Color(0.419608, 0.447059, 0.509804, 1)
@@ -91,6 +92,7 @@ mass = 3.0
 script = ExtResource("1_q3iq3")
 gun_name = "idk"
 magazine_size = 30
+audio_stream = ExtResource("2_6u2dc")
 
 [node name="mesh" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04883, 0.104297, 0)
@@ -230,3 +232,6 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="firing_sound_pos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23335, 0.185052, 0)
