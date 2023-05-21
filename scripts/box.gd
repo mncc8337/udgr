@@ -11,6 +11,7 @@ var destructive = false
 var is_destroyed = false
 
 var speed_when_holding = 0.7
+var view_range_increase_to = 2.5
 
 func _ready():
 	$Timer.timeout.connect(_on_time_out)

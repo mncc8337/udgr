@@ -75,13 +75,14 @@ _data = {
 [node name="shotgun" type="RigidBody3D" groups=["gun"]]
 mass = 3.0
 script = ExtResource("1_03o43")
-gun_name = "idk"
+gun_name = "notashotgun"
 damage = 15.0
 max_recoil = 0.4
 inaccuracy = 0.1
 firing_speed = 0.8
 bullet_per_shot = 8
 magazine_size = 2
+view_range_increase_to = 5.5
 speed_when_holding = 0.8
 audio_stream = ExtResource("2_3ph08")
 

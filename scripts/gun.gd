@@ -12,6 +12,7 @@ extends RigidBody3D
 @export var firing_speed = .1
 @export var bullet_per_shot = 1
 @export var magazine_size = 40
+@export var view_range_increase_to = 6.5
 @export var speed_when_holding = 1.0 # * 100 %
 @export var audio_stream: AudioStream
 @export var between_firing_animation = "no"
