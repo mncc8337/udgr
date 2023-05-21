@@ -34,7 +34,7 @@ size = Vector3(0.12063, 0.210771, 0.137)
 
 [sub_resource type="Animation" id="Animation_8wqsq"]
 resource_name = "reloading"
-length = 5.0
+length = 5.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -42,10 +42,10 @@ tracks/0/path = NodePath("dsd:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.1, 4.2, 4.8),
+"times": PackedFloat32Array(0, 0.4, 4.4, 4.8),
 "transitions": PackedFloat32Array(1, 1, 1, 0.125),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.523599), Vector3(0, 0, 0.523599), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.349066), Vector3(0, 0, 0.349066), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -54,10 +54,10 @@ tracks/1/path = NodePath("dsd/mag:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.4, 1, 1.5, 1.9, 2.2, 2.7, 3.5, 3.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(1.1, 1.3, 1.8, 2.4, 3.2, 3.7, 4, 4.3),
+"transitions": PackedFloat32Array(1, 1, 3.36359, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.25, -0.12, 0), Vector3(-0.5, -0.2, -0.2), Vector3(-1, -0.4, -0.6), Vector3(-1.5, -0.2, -0.6), Vector3(-1.5, -0.2, -0.6), Vector3(-1, -0.4, -0.6), Vector3(-0.5, -0.3, 0), Vector3(-0.25, -0.12, 0)]
+"values": [Vector3(-0.25, -0.12, 0), Vector3(-0.25, -0.2, 0), Vector3(-1, -0.4, -0.6), Vector3(-1.5, -0.2, -0.6), Vector3(-1.5, -0.1, -0.6), Vector3(-1, -0.4, -0.6), Vector3(-0.5, -0.3, 0), Vector3(-0.25, -0.12, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -66,10 +66,10 @@ tracks/2/path = NodePath("dsd/mag:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2.5, 2.7),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1.8, 2.5, 3.2, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [true, false, true]
+"values": [true, true, false, false, true]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -78,10 +78,10 @@ tracks/3/path = NodePath("dsd/mag:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.4, 0.8, 1.7, 3.2, 3.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.9, 1.4, 3.7, 4.3, 4.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0.418879), Vector3(0, 0, -0.418879), Vector3(0, 0, -1.0472), Vector3(0, 0, -0.418879), Vector3(0, 0, 0.418879)]
+"values": [Vector3(0, 0, 0.418879), Vector3(0, 0, 0.418879), Vector3(0, 0, -0.418879), Vector3(0, 0, -0.418879), Vector3(0, 0, 0.418879), Vector3(0, 0, 0.418879)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -90,10 +90,34 @@ tracks/4/path = NodePath("dsd:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.8, 4.1, 4.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.7, 4.1, 4.9),
+"transitions": PackedFloat32Array(4.28709, 0.153893, 2.63902, 0.297302),
 "update": 0,
 "values": [Vector3(0.898, 0.2, 0.03), Vector3(0.898, 0.8, 0.03), Vector3(0.898, 0.8, 0.03), Vector3(0.898, 0.2, 0.03)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("dsd/CSGCombiner3D3/CSGBox3D12:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 5, 5.1, 5.3, 5.4),
+"transitions": PackedFloat32Array(1, 2.63902, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.4, 0.125, 0.001), Vector3(-0.4, 0.125, 0.001), Vector3(-0.6, 0.125, 0.001), Vector3(-0.6, 0.125, 0.001), Vector3(-0.4, 0.125, 0.001)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("dsd/CSGCombiner3D3/CSGBox3D12:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 4.9, 5, 5.4, 5.5),
+"transitions": PackedFloat32Array(1, 1, 1, 6.06287, 1),
+"update": 0,
+"values": [Vector3(0.698132, 0, 0), Vector3(0.698132, 0, 0), Vector3(-0.872665, 0, 0), Vector3(-0.872665, 0, 0), Vector3(0.698132, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n2xwd"]
@@ -143,7 +167,6 @@ inaccuracy = 0.0
 firing_speed = 1.3
 magazine_size = 7
 audio_stream = ExtResource("2_utnap")
-audio_reload_between_firing = ExtResource("2_utnap")
 between_firing_animation = true
 
 [node name="dsd" type="Node3D" parent="."]
