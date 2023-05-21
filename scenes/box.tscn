@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfa5hiar44uop"]
+[gd_scene load_steps=10 format=3 uid="uid://dfa5hiar44uop"]
 
 [ext_resource type="Script" path="res://scripts/box.gd" id="1_g8hh3"]
-[ext_resource type="Texture2D" uid="uid://bnsfg0yjqg4c2" path="res://imgs/box.png" id="2_x4a4x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yip5e"]
 albedo_color = Color(1, 0.615686, 0.321569, 1)
@@ -51,7 +50,6 @@ size = Vector3(0.274, 0.183, 0.242)
 max_contacts_reported = 8
 contact_monitor = true
 script = ExtResource("1_g8hh3")
-preview_img = ExtResource("2_x4a4x")
 
 [node name="mesh" type="CSGCombiner3D" parent="."]
 
