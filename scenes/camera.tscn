@@ -19,7 +19,7 @@ shader_parameter/shadow_color = Color(0, 0, 0, 1)
 [node name="Camera3D" type="Camera3D"]
 projection = 1
 current = true
-size = 10.0
+size = 18.0
 near = 0.001
 script = ExtResource("1_ypxcb")
 
