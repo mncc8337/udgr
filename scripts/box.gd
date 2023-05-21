@@ -3,14 +3,15 @@ extends RigidBody3D
 @onready var MAIN = get_tree().get_root().get_node("main")
 @onready var players = get_tree().get_nodes_in_group("player")
 
-@export var preview_img: Texture
-
 signal hit_received(damage)
 signal destructive_mode
 var health = 100
 var is_holding = false
 var destructive = false
 var is_destroyed = false
+
+var speed_when_holding = 0.7
+var view_range_increase_to = 2.5
 
 func _ready():
 	$Timer.timeout.connect(_on_time_out)

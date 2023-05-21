@@ -10,7 +10,12 @@ extends RigidBody3D
 @export var max_recoil = .1 # time PI/2
 @export var inaccuracy = 0.01
 @export var firing_speed = .1
+@export var bullet_per_shot = 1
 @export var magazine_size = 40
+
+@export var view_range_increase_to = 6.5
+@export var speed_when_holding = 1.0 # * 100 %
+
 @export var audio_stream: AudioStream
 @export var speed_when_holding = 1.0 
 @export var audio_reload_between_firing: AudioStream
@@ -83,8 +88,31 @@ func play_firing_sound():
 	audioStreamPlayer.volume_db = .8
 	audioStreamPlayer.finished.connect(audioStreamPlayer.queue_free)
 	audioStreamPlayer.play()
+
+func shot_bullet():
+	var angle = MAIN.rng.randf_range(-inaccuracy, inaccuracy)
+	$raycast.rotation.z = angle # this make bullet inaccurate
+	$raycast.force_raycast_update()
+
+	var point = $raycast.get_collision_point()
+	if not $raycast.is_colliding():
+		var dir = ($raycast.global_position - $start.global_position) * 400
+		point.x = $raycast.global_position.x + dir.x
+		point.y = $raycast.global_position.y + dir.y
+
+	var obj = $raycast.get_collider()
+	if obj != null:
+		if obj.is_in_group("box"):
+			obj.hit_received.emit(damage)
+
+	var new_trail = trail.instantiate()
+	MAIN.add_child(new_trail)
+	new_trail.startpoint = $raycast.global_position
+	new_trail.endpoint = point
+	new_trail.start(0.2)
 	
-	
+	$raycast.rotation.z = 0
+
 func _physics_process(_delta):
 	position.z = 0
 	linear_velocity.z = 0
@@ -115,28 +143,10 @@ func _process(delta):
 			and $Timer.is_stopped()
 			and is_holding
 			and reloading_stopped):
-		var angle = MAIN.rng.randf_range(-inaccuracy, inaccuracy)
-		$raycast.rotation.z = angle # this make bullet inaccurate
-		$raycast.force_raycast_update()
+		
+		for i in bullet_per_shot:
+			shot_bullet()
 
-		var point = $raycast.get_collision_point()
-		if not $raycast.is_colliding():
-			var dir = ($raycast.global_position - $start.global_position) * 400
-			point.x = $raycast.global_position.x + dir.x
-			point.y = $raycast.global_position.y + dir.y
-			
-		var obj = $raycast.get_collider()
-		if obj != null:
-			if obj.is_in_group("box"):
-				obj.hit_received.emit(damage)
-
-		var new_trail = trail.instantiate()
-		MAIN.add_child(new_trail)
-		new_trail.startpoint = $raycast.global_position
-		new_trail.endpoint = point
-		new_trail.start(0.2)
-
-		$raycast.rotation.z = 0
 		$flash.visible = true
 		$flash_timer.start()
 		play_firing_sound()

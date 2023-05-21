@@ -29,3 +29,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.205728, 0.393152, 0)
 operation = 2
 size = Vector3(0.157672, 0.661756, 0.627032)
 material = SubResource("StandardMaterial3D_fe52b")
+
+[node name="gun_holder" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.36425)
+
+[node name="box_holder" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.541454, 0)
+
+[node name="real_pos" type="Node3D" parent="box_holder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45996, 0, 0)
