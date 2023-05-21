@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://nnjmms1y5v4l"]
+[gd_scene load_steps=23 format=3 uid="uid://nnjmms1y5v4l"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_ccl51"]
 [ext_resource type="PackedScene" uid="uid://cm4c5xysnttlv" path="res://scenes/light-bulb.tscn" id="3_djiv6"]
@@ -7,10 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cecnee3pqjlk7" path="res://scenes/player.tscn" id="8_bp4hv"]
 [ext_resource type="PackedScene" uid="uid://bla3dq72k024l" path="res://scenes/assasult_rifle.tscn" id="9_rai2g"]
 [ext_resource type="PackedScene" uid="uid://yaoh2ohalhm3" path="res://scenes/sub_machine_gun.tscn" id="9_tmbis"]
-[ext_resource type="Script" path="res://scripts/gun.gd" id="10_8wssb"]
 [ext_resource type="PackedScene" uid="uid://b3fbl6ai8k200" path="res://scenes/box_spawner.tscn" id="10_eao4d"]
-[ext_resource type="PackedScene" uid="uid://t3b2d50e5a4a" path="res://scenes/wand.tscn" id="11_n8f41"]
-[ext_resource type="PackedScene" uid="uid://5xh20tbobeb" path="res://scenes/shotgun.tscn" id="12_lbqga"]
+[ext_resource type="PackedScene" uid="uid://bdk8ymivnbf80" path="res://scenes/sniper.tscn" id="11_jb4t8"]
+[ext_resource type="PackedScene" uid="uid://demek3llyoah0" path="res://scenes/shotgun.tscn" id="12_lbqga"]
 [ext_resource type="LabelSettings" uid="uid://bu0rd8q5qya7e" path="res://label_setting.tres" id="12_yh4yd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wcd6e"]
@@ -36,39 +35,6 @@ emission_enabled = true
 material = SubResource("StandardMaterial3D_tboei")
 radial_segments = 5
 rings = 3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ouvlo"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_skj8c"]
-size = Vector3(0.505428, 0.199901, 0.137)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_8l2h2"]
-size = Vector3(0.709172, 0.0602679, 0.137)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_dtl6l"]
-size = Vector3(0.12063, 0.210771, 0.137)
-
-[sub_resource type="Animation" id="Animation_8wqsq"]
-resource_name = "reloading"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("dsd:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 6.28319)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2xwd"]
-_data = {
-"reloading": SubResource("Animation_8wqsq")
-}
 
 [sub_resource type="Environment" id="Environment_ct120"]
 background_energy_multiplier = 0.3
@@ -235,90 +201,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88304, 1.30082, -0.378797)
 [node name="sub_machine_gun" parent="." instance=ExtResource("9_tmbis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.44601, 3.3455, 0)
 
-[node name="sniper" type="RigidBody3D" parent="." groups=["gun"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5143, 1.30082, -0.378797)
-mass = 3.0
-script = ExtResource("10_8wssb")
-gun_name = "siu"
-damage = 120.0
-max_recoil = 0.5
-inaccuracy = 0.0
-firing_speed = 1.3
-magazine_size = 7
-
-[node name="dsd" type="CSGCombiner3D" parent="sniper"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04883, 0.104297, 0)
-material_override = SubResource("StandardMaterial3D_ouvlo")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="sniper/dsd"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180179, 0.0223745, 0)
-size = Vector3(1.424, 0.211, 0.076)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="sniper/dsd"]
-transform = Transform3D(0.969158, 0.246441, 0, -0.246441, 0.969158, 0, 0, 0, 1, -0.490464, -0.222648, 1.19209e-07)
-size = Vector3(0.158154, 0.355, 0.038)
-
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="sniper/dsd"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.503779, -0.0191618, 0)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="sniper/dsd/CSGCombiner3D"]
-transform = Transform3D(0.94769, -0.319191, 0, 0.319191, 0.94769, 0, 0, 0, 1, -1.34295, -0.114095, 0)
-size = Vector3(0.776, 0.211, 0.076)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="sniper/dsd/CSGCombiner3D"]
-transform = Transform3D(0.901561, -0.432652, 0, 0.432652, 0.901561, 0, 0, 0, 1, -1.19776, -0.250052, 0)
-operation = 2
-size = Vector3(1, 0.305, 0.156)
-
-[node name="col1" type="CollisionShape3D" parent="sniper"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22671, 0.12521, 0)
-shape = SubResource("BoxShape3D_skj8c")
-
-[node name="col2" type="CollisionShape3D" parent="sniper"]
-transform = Transform3D(0.947768, -0.318959, 0, 0.318959, 0.947768, 0, 0, 0, 1, 0.153356, -0.0214289, -1.19209e-07)
-shape = SubResource("BoxShape3D_8l2h2")
-
-[node name="col3" type="CollisionShape3D" parent="sniper"]
-transform = Transform3D(0.969016, 0.246999, 0, -0.246999, 0.969016, 0, 0, 0, 1, 0.553328, -0.1344, -1.19209e-07)
-shape = SubResource("BoxShape3D_dtl6l")
-
-[node name="flash" type="SpotLight3D" parent="sniper"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.00969, 0.179091, 0)
-visible = false
-light_color = Color(1, 0.603922, 0, 1)
-light_energy = 5.0
-spot_range = 1000.0
-spot_angle = 73.97
-
-[node name="flash_timer" type="Timer" parent="sniper"]
-one_shot = true
-
-[node name="raycast" type="RayCast3D" parent="sniper"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97194, 0.194, 0)
-target_position = Vector3(10000, 0, 0)
-
-[node name="start" type="Node3D" parent="sniper"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.582283, 0.194, 0)
-
-[node name="reload_timer" type="Timer" parent="sniper"]
-one_shot = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="sniper"]
-libraries = {
-"": SubResource("AnimationLibrary_n2xwd")
-}
-
-[node name="Timer" type="Timer" parent="sniper"]
-one_shot = true
-
-[node name="firing_sound_pos" type="Node3D" parent="sniper"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.06476, 0.170624, 0)
-
-[node name="wand" parent="." instance=ExtResource("11_n8f41")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8566, 3.50437, 0)
-
 [node name="shotgun" parent="." instance=ExtResource("12_lbqga")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.37249, 3, -0.103426)
+
+[node name="sniper" parent="." instance=ExtResource("11_jb4t8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6115, 2.52731, 0.919746)
 
 [node name="box_spawner" parent="." instance=ExtResource("10_eao4d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.80991, 5.19527, 0.0183089)

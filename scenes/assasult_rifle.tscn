@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bla3dq72k024l"]
+[gd_scene load_steps=12 format=3 uid="uid://bla3dq72k024l"]
 
 [ext_resource type="Script" path="res://scripts/gun.gd" id="1_q3iq3"]
 [ext_resource type="AudioStream" uid="uid://d3bpnc1c0jg8l" path="res://sfx/rifle.mp3" id="2_6u2dc"]
-[ext_resource type="AudioStream" uid="uid://byx1bs1lem487" path="res://sfx/AR_reload.mp3" id="3_wsqrj"]
+[ext_resource type="AudioStream" uid="uid://c4xn5rwn16bqs" path="res://sfx/rifle_mag_out.mp3" id="2_du4kf"]
+[ext_resource type="AudioStream" uid="uid://bgw287n8fmuqi" path="res://sfx/rifle_mag_in.mp3" id="3_w7phq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8utwe"]
 albedo_color = Color(0.419608, 0.447059, 0.509804, 1)
@@ -82,20 +83,44 @@ tracks/4/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("mesh/mag/mag_out:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("mesh/mag/mag_in:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2.7),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ij36q"]
 _data = {
 "reloading": SubResource("Animation_ssbwn")
 }
 
-[node name="assasult_rifle" type="RigidBody3D" node_paths=PackedStringArray("reload_sound_pos") groups=["gun"]]
+[node name="assasult_rifle" type="RigidBody3D" groups=["gun"]]
 mass = 3.0
 script = ExtResource("1_q3iq3")
 gun_name = "idk"
+view_range_increase_to = 5.5
 magazine_size = 30
-audio_stream = ExtResource("2_6u2dc")
-reload_sound_pos = NodePath("mesh/mag")
-between_firing_animation = true
+firing_audio_stream = ExtResource("2_6u2dc")
+speed_when_holding = 0.9
 
 [node name="mesh" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04883, 0.104297, 0)
@@ -118,6 +143,14 @@ operation = 2
 size = Vector3(0.80758, 0.188972, 0.156)
 
 [node name="mag" type="CSGCombiner3D" parent="mesh"]
+
+[node name="mag_out" type="AudioStreamPlayer3D" parent="mesh/mag"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.102218, -0.140603, 0)
+stream = ExtResource("2_du4kf")
+
+[node name="mag_in" type="AudioStreamPlayer3D" parent="mesh/mag"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.102218, -0.140603, 0)
+stream = ExtResource("3_w7phq")
 
 [node name="handle2" type="CSGBox3D" parent="mesh/mag"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0918752, -0.0663436, 1.19209e-07)
@@ -239,12 +272,5 @@ one_shot = true
 [node name="firing_sound_pos" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23335, 0.185052, 0)
 
-[node name="reload_bwt_f_pos" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.587251, 0.148492, 0.0710304)
-
-[node name="StreamPlayers" type="Node3D" parent="."]
-
-[node name="Reload_Sound" type="AudioStreamPlayer3D" parent="StreamPlayers"]
-stream = ExtResource("3_wsqrj")
-
-[node name="between_firing_sound" type="AudioStreamPlayer3D" parent="StreamPlayers"]
+[node name="center" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10961, 0.102425, 0)

@@ -4,7 +4,7 @@ extends CharacterBody3D
 
 @export var SPEED = 5.0
 @export var JUMP_VELOCITY = 5.2
-@export var gun_focus_speed = 15.0
+@export var gun_focus_speed = 8.0
 @export var pick_range = 2.5
 
 @onready var z = position.z
