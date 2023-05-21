@@ -13,7 +13,7 @@ func _physics_process(delta):
 	# get mouse position in 3D space
 	var window = MAIN.window_size
 	mouse_vec = MAIN.mouse_pos - Vector2(window.x/2, window.y/2)
-	mouse_pos = Vector3(mouse_vec.x, -mouse_vec.y, 0) * size/window.y
+	mouse_pos = Vector3(mouse_vec.x, -mouse_vec.y, 0) * size/window.x
 	mouse_pos.y += position.z * tan(rotation.x)
 	mouse_vec.y *= window.x / window.y
 	mouse_vec *= .2

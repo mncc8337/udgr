@@ -1,11 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://nnjmms1y5v4l"]
+[gd_scene load_steps=30 format=3 uid="uid://nnjmms1y5v4l"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_ccl51"]
 [ext_resource type="PackedScene" uid="uid://cm4c5xysnttlv" path="res://scenes/light-bulb.tscn" id="3_djiv6"]
 [ext_resource type="Script" path="res://scripts/follow_window_size.gd" id="4_p0a0y"]
 [ext_resource type="PackedScene" uid="uid://befsblxo1kr4s" path="res://scenes/camera.tscn" id="5_k05cb"]
-[ext_resource type="Shader" path="res://shaders/dithering.gdshader" id="6_ssqkf"]
-[ext_resource type="Shader" path="res://shaders/vhs.gdshader" id="7_cnw40"]
 [ext_resource type="PackedScene" uid="uid://cecnee3pqjlk7" path="res://scenes/player.tscn" id="8_bp4hv"]
 [ext_resource type="PackedScene" uid="uid://bla3dq72k024l" path="res://scenes/assasult_rifle.tscn" id="9_rai2g"]
 [ext_resource type="PackedScene" uid="uid://yaoh2ohalhm3" path="res://scenes/sub_machine_gun.tscn" id="9_tmbis"]
@@ -28,33 +26,6 @@ size = Vector3(100, 0.1, 10)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gsbyw"]
 size = Vector2(100, 10)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ah24q"]
-shader = ExtResource("6_ssqkf")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5r7nx"]
-shader = ExtResource("7_cnw40")
-shader_parameter/overlay = true
-shader_parameter/scanlines_opacity = 0.4
-shader_parameter/scanlines_width = 0.25
-shader_parameter/grille_opacity = 0.3
-shader_parameter/resolution = Vector2(640, 480)
-shader_parameter/pixelate = true
-shader_parameter/roll = false
-shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 1.0
-shader_parameter/roll_variation = 1.68
-shader_parameter/distort_intensity = 0.05
-shader_parameter/noise_opacity = 0.0
-shader_parameter/noise_speed = 5.0
-shader_parameter/static_noise_intensity = 0.06
-shader_parameter/aberration = 0.03
-shader_parameter/brightness = 1.4
-shader_parameter/discolor = true
-shader_parameter/warp_amount = 0.0
-shader_parameter/clip_warp = false
-shader_parameter/vignette_intensity = 0.4
-shader_parameter/vignette_opacity = 0.396
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tboei"]
 albedo_color = Color(0.470588, 0.639216, 1, 1)
@@ -139,9 +110,67 @@ _data = {
 [node name="main" type="Node"]
 script = ExtResource("1_ccl51")
 
-[node name="map" type="Node" parent="."]
+[node name="svc" type="SubViewportContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+stretch = true
+stretch_shrink = 3
+script = ExtResource("4_p0a0y")
 
-[node name="walls" type="Node" parent="map"]
+[node name="sv" type="SubViewport" parent="svc"]
+handle_input_locally = false
+audio_listener_enable_3d = true
+size = Vector2i(384, 216)
+render_target_update_mode = 4
+
+[node name="Camera3D" parent="svc/sv" node_paths=PackedStringArray("target") instance=ExtResource("5_k05cb")]
+transform = Transform3D(1, 0, 0, 0, 0.992546, 0.121869, 0, -0.121869, 0.992546, 0, 2.03, 4.8)
+keep_aspect = 0
+target = NodePath("../../../player")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1.0
+offset_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -329.143
+offset_top = -92.57
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="gun_name" type="Label" parent="UI/Panel"]
+layout_mode = 2
+offset_left = 59.0
+offset_top = 25.0
+offset_right = 228.0
+offset_bottom = 67.0
+text = "some name"
+label_settings = ExtResource("12_yh4yd")
+vertical_alignment = 1
+
+[node name="ammo" type="Label" parent="UI/Panel"]
+layout_mode = 2
+offset_left = 232.0
+offset_top = 25.0
+offset_right = 329.0
+offset_bottom = 67.0
+auto_translate = false
+text = "69/420"
+label_settings = ExtResource("12_yh4yd")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="map" type="Node3D" parent="."]
+
+[node name="walls" type="Node3D" parent="map"]
 
 [node name="floor" type="StaticBody3D" parent="map/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
@@ -187,44 +216,10 @@ shape = SubResource("BoxShape3D_yjw4l")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 mesh = SubResource("PlaneMesh_gsbyw")
 
-[node name="lights" type="Node" parent="map"]
+[node name="lights" type="Node3D" parent="map"]
 
 [node name="light-bulb" parent="map/lights" instance=ExtResource("3_djiv6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.18395, 0)
-
-[node name="svc" type="SubViewportContainer" parent="."]
-offset_right = 1152.0
-offset_bottom = 648.0
-stretch = true
-stretch_shrink = 3
-script = ExtResource("4_p0a0y")
-
-[node name="sv" type="SubViewport" parent="svc"]
-handle_input_locally = false
-audio_listener_enable_3d = true
-size = Vector2i(384, 216)
-render_target_update_mode = 4
-
-[node name="Camera3D" parent="svc/sv" node_paths=PackedStringArray("target") instance=ExtResource("5_k05cb")]
-transform = Transform3D(1, 0, 0, 0, 0.992546, 0.121869, 0, -0.121869, 0.992546, 0, 2.03, 5)
-target = NodePath("../../../player")
-
-[node name="dithering" type="ColorRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_ah24q")
-offset_right = 1152.0
-offset_bottom = 648.0
-mouse_filter = 2
-mouse_force_pass_scroll_events = false
-script = ExtResource("4_p0a0y")
-
-[node name="vhs" type="ColorRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_5r7nx")
-offset_right = 1152.0
-offset_bottom = 648.0
-mouse_filter = 2
-script = ExtResource("4_p0a0y")
 
 [node name="player" parent="." instance=ExtResource("8_bp4hv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.90432, 1.8782, 0)
@@ -323,7 +318,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.06476, 0.170624, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8566, 3.50437, 0)
 
 [node name="shotgun" parent="." instance=ExtResource("12_lbqga")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, 0.546146)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.37249, 3, -0.103426)
 
 [node name="box_spawner" parent="." instance=ExtResource("10_eao4d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.80991, 5.19527, 0.0183089)
@@ -336,43 +331,3 @@ autoplay = "test"
 libraries = {
 "": SubResource("AnimationLibrary_y1wg7")
 }
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1.0
-offset_bottom = 1.0
-
-[node name="Panel" type="Panel" parent="UI"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -329.143
-offset_top = -92.57
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="gun_name" type="Label" parent="UI/Panel"]
-layout_mode = 2
-offset_left = 59.0
-offset_top = 25.0
-offset_right = 228.0
-offset_bottom = 67.0
-text = "some name"
-label_settings = ExtResource("12_yh4yd")
-vertical_alignment = 1
-
-[node name="ammo" type="Label" parent="UI/Panel"]
-layout_mode = 2
-offset_left = 232.0
-offset_top = 25.0
-offset_right = 329.0
-offset_bottom = 67.0
-auto_translate = false
-text = "69/420"
-label_settings = ExtResource("12_yh4yd")
-horizontal_alignment = 2
-vertical_alignment = 1

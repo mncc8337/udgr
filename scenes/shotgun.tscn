@@ -49,10 +49,10 @@ tracks/2/path = NodePath("mesh/body/shells:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.9, 1.1, 1.6, 2),
+"times": PackedFloat32Array(0, 0.48, 0.9, 1.1, 1.6, 2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0.0121117, 0.0695337, 0), Vector3(0.0121117, 0.0695337, 0), Vector3(-5, 2, 0), Vector3(-0.6, -0.4, -0.6), Vector3(-0.12, 0.075, 0), Vector3(0.012, 0.07, 0)]
+"values": [Vector3(0.0121117, 0.0695337, 0), Vector3(0.0121117, 0.0695337, 0), Vector3(-10, 4, 0), Vector3(-0.6, -0.4, -0.6), Vector3(-0.12, 0.075, 0), Vector3(0.012, 0.07, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -79,7 +79,7 @@ gun_name = "notashotgun"
 damage = 15.0
 max_recoil = 0.4
 inaccuracy = 0.1
-firing_speed = 0.8
+firing_speed = 0.4
 bullet_per_shot = 8
 magazine_size = 2
 view_range_increase_to = 5.5
@@ -106,7 +106,7 @@ size = Vector3(0.80758, 0.188972, 0.156)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.490372, -0.0301263, 0)
 
 [node name="shells" type="Node3D" parent="mesh/body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0.07, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0121117, 0.0695337, 0)
 
 [node name="shell1" type="CSGBox3D" parent="mesh/body/shells"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03)

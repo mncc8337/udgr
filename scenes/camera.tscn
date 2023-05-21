@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://befsblxo1kr4s"]
 
 [ext_resource type="Script" path="res://scripts/camera.gd" id="1_ypxcb"]
-[ext_resource type="Shader" path="res://shaders/pixelart_outliner.gdshader" id="2_0h22r"]
+[ext_resource type="Shader" path="res://shaders/pixelart_outliner.gdshader" id="2_7mgtt"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_33r7g"]
+[sub_resource type="QuadMesh" id="QuadMesh_t0oil"]
 size = Vector2(20, 12)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kykdc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nhlll"]
 render_priority = 0
-shader = ExtResource("2_0h22r")
+shader = ExtResource("2_7mgtt")
 shader_parameter/shadows_enabled = true
 shader_parameter/highlights_enabled = true
 shader_parameter/shadow_strength = 0.4
@@ -23,7 +23,7 @@ size = 10.0
 near = 0.001
 script = ExtResource("1_ypxcb")
 
-[node name="pixelart_outliner" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1.73579)
-mesh = SubResource("PlaneMesh_33r7g")
-surface_material_override/0 = SubResource("ShaderMaterial_kykdc")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.04408)
+mesh = SubResource("QuadMesh_t0oil")
+surface_material_override/0 = SubResource("ShaderMaterial_nhlll")
