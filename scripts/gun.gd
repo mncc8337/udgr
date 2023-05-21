@@ -11,24 +11,29 @@ extends RigidBody3D
 @export var inaccuracy = 0.01
 @export var firing_speed = .1
 @export var magazine_size = 40
-@export var speed_when_holding = 1.0 # * 100 %
 @export var audio_stream: AudioStream
-@export var between_firing_animation = "no"
+@export var speed_when_holding = 1.0 
+@export var audio_reload_between_firing: AudioStream
+@export var between_firing_animation = false
 
 var is_holding = false
 var magazine: int
 var reloading_animation = false
-
+var _reload_between_firing = false
 func _ready():
 	magazine = magazine_size
 	$Timer.wait_time = firing_speed
 	$flash_timer.wait_time = .05
 	$flash_timer.timeout.connect(_on_flash_timer_timeout)
 	$AnimationPlayer.animation_finished.connect(_on_finish_reloaded)
+	$AnimationPlayer.animation_finished.connect(_on_finish_reloaded_between_firing)
 
 func _on_flash_timer_timeout():
 	$flash.visible = false
-	
+func _on_finish_reloaded_between_firing():
+	if is_holding and _reload_between_firing:
+		$AnimationPlayer2.stop()
+	_reload_between_firing = false
 func _on_finish_reloaded(anim_name):
 	if is_holding and reloading_animation:
 		magazine = magazine_size
@@ -47,7 +52,11 @@ func reload():
 		reloading_animation = true
 		# player
 		get_parent().get_parent().is_reloading = true
-
+func reload_between_firing():
+	if is_holding:
+		$AnimationPlayer2.speed_scale=1
+		$AnimationPlayer2.play("anim_between_firing_snip")
+		_reload_between_firing = true
 func toggle_holding(hold):
 	if hold:
 		linear_velocity = Vector3.ZERO
@@ -64,18 +73,18 @@ func toggle_holding(hold):
 		freeze = false
 
 func play_firing_sound():
-	if audio_stream == null: return
-	
+	if audio_stream == null : return
 	var audioStreamPlayer = AudioStreamPlayer3D.new();
+	
 	MAIN.add_child(audioStreamPlayer)
 	audioStreamPlayer.stream = audio_stream
 	audioStreamPlayer.global_position = $firing_sound_pos.global_position
-	audioStreamPlayer.pitch_scale = MAIN.rng.randf_range(0.8, 1.2)
+	audioStreamPlayer.pitch_scale = MAIN.rng.randf_range(0.9, 1.1)
 	audioStreamPlayer.volume_db = .8
-	
 	audioStreamPlayer.finished.connect(audioStreamPlayer.queue_free)
 	audioStreamPlayer.play()
-
+	
+	
 func _physics_process(_delta):
 	position.z = 0
 	linear_velocity.z = 0
@@ -131,6 +140,7 @@ func _process(delta):
 		$flash.visible = true
 		$flash_timer.start()
 		play_firing_sound()
+		
 
 		var recoil = MAIN.rng.randf_range(max_recoil * PI/2 * 0.5, max_recoil * PI/2)
 		rotation.z += recoil
@@ -142,8 +152,12 @@ func _process(delta):
 		else:
 			ammo_text.text = str(magazine) + "/" + str(magazine_size)
 			$Timer.start()
-			if between_firing_animation != "no":
-				$AnimationPlayer.play(between_firing_animation)
+			if between_firing_animation : 
+				reload_between_firing()
+				$AudioStreamPlayer3D.pitch_scale = MAIN.rng.randf_range(0.9, 1.1)
+				$AudioStreamPlayer3D.global_position = $reload_bwt_f_pos.global_position
+				$AudioStreamPlayer3D.volume_db = 1
+				$AudioStreamPlayer3D.play()
 			
 	if is_holding:
 		var min_length = ($raycast.global_position - get_parent().global_position).length()
