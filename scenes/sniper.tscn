@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://2hy6d11w4b8d"]
+[gd_scene load_steps=19 format=3 uid="uid://2hy6d11w4b8d"]
 
 [ext_resource type="Script" path="res://scripts/gun.gd" id="1_2so4f"]
 [ext_resource type="AudioStream" uid="uid://bqwk054ot6jk4" path="res://sfx/sr.mp3" id="2_utnap"]
 [ext_resource type="AudioStream" uid="uid://dcifs4fvnf0hn" path="res://sfx/snip_reload_bwfr.mp3" id="3_aha71"]
+[ext_resource type="AudioStream" uid="uid://2d048grnkn48" path="res://sfx/reload_mag_sr.mp3" id="4_my3bw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eahn7"]
 albedo_color = Color(0.231373, 0.231373, 0.231373, 1)
@@ -126,7 +127,7 @@ _data = {
 }
 
 [sub_resource type="Animation" id="Animation_bcscu"]
-resource_name = "anim_between_firing_snip"
+resource_name = "between_firing_sniper"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -154,19 +155,22 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cr107"]
 _data = {
-"anim_between_firing_snip": SubResource("Animation_bcscu")
+"between_firing_sniper": SubResource("Animation_bcscu")
 }
 
-[node name="sniper" type="RigidBody3D" groups=["gun"]]
+[node name="sniper" type="RigidBody3D" node_paths=PackedStringArray("reload_sound_pos") groups=["gun"]]
 mass = 3.0
 script = ExtResource("1_2so4f")
 gun_name = "siu"
+animation_between_reload = "between_firing_sniper"
 damage = 120.0
 max_recoil = 0.5
 inaccuracy = 0.0
 firing_speed = 1.3
 magazine_size = 7
 audio_stream = ExtResource("2_utnap")
+speed_when_holding = 0.8
+reload_sound_pos = NodePath("dsd/mag")
 between_firing_animation = true
 
 [node name="dsd" type="Node3D" parent="."]
@@ -316,5 +320,10 @@ libraries = {
 "": SubResource("AnimationLibrary_cr107")
 }
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="StreamPlayers" type="Node3D" parent="."]
+
+[node name="between_firing_sound" type="AudioStreamPlayer3D" parent="StreamPlayers"]
 stream = ExtResource("3_aha71")
+
+[node name="Reload_Sound" type="AudioStreamPlayer3D" parent="StreamPlayers"]
+stream = ExtResource("4_my3bw")

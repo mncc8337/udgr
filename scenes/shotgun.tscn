@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://5xh20tbobeb"]
+[gd_scene load_steps=9 format=3 uid="uid://demek3llyoah0"]
 
 [ext_resource type="Script" path="res://scripts/gun.gd" id="1_03o43"]
 [ext_resource type="AudioStream" uid="uid://d3bpnc1c0jg8l" path="res://sfx/rifle.mp3" id="2_3ph08"]
@@ -26,7 +26,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 2, 2.3, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"transitions": PackedFloat32Array(0.63728, 1, 1, 0.241484, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.174533), Vector3(0, 0, 0.174533), Vector3(0, 0, 0.523599), Vector3(0, 0, 0)]
 }
@@ -38,7 +38,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.2, 0.5, 2, 2.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"transitions": PackedFloat32Array(4.28709, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, -0.785398), Vector3(0, 0, -0.785398), Vector3(0, 0, 0)]
 }
@@ -72,7 +72,7 @@ _data = {
 "reloading": SubResource("Animation_ssbwn")
 }
 
-[node name="shotgun" type="RigidBody3D" groups=["gun"]]
+[node name="shotgun" type="RigidBody3D" node_paths=PackedStringArray("reload_sound_pos") groups=["gun"]]
 mass = 3.0
 script = ExtResource("1_03o43")
 gun_name = "notashotgun"
@@ -80,11 +80,10 @@ damage = 15.0
 max_recoil = 0.4
 inaccuracy = 0.1
 firing_speed = 0.8
-bullet_per_shot = 8
 magazine_size = 2
-view_range_increase_to = 5.5
-speed_when_holding = 0.8
 audio_stream = ExtResource("2_3ph08")
+speed_when_holding = 0.8
+reload_sound_pos = NodePath("mesh/stock")
 
 [node name="mesh" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04883, 0.104297, 0)
@@ -106,7 +105,7 @@ size = Vector3(0.80758, 0.188972, 0.156)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.490372, -0.0301263, 0)
 
 [node name="shells" type="Node3D" parent="mesh/body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0.07, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0121117, 0.0695337, 0)
 
 [node name="shell1" type="CSGBox3D" parent="mesh/body/shells"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.03)
@@ -162,3 +161,12 @@ one_shot = true
 
 [node name="firing_sound_pos" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.35722, 0.169209, 0)
+
+[node name="reload_bwt_f_pos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.587251, 0.148492, 0.0710304)
+
+[node name="StreamPlayers" type="Node3D" parent="."]
+
+[node name="between_firing_sound" type="AudioStreamPlayer3D" parent="StreamPlayers"]
+
+[node name="Reload_Sound" type="AudioStreamPlayer3D" parent="StreamPlayers"]

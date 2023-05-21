@@ -1,7 +1,4 @@
-
-[gd_scene load_steps=27 format=3 uid="uid://nnjmms1y5v4l"]
-
-[gd_scene load_steps=34 format=3 uid="uid://nnjmms1y5v4l"]
+[gd_scene load_steps=28 format=3 uid="uid://nnjmms1y5v4l"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_ccl51"]
 [ext_resource type="PackedScene" uid="uid://cm4c5xysnttlv" path="res://scenes/light-bulb.tscn" id="3_djiv6"]
@@ -15,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://2hy6d11w4b8d" path="res://scenes/sniper.tscn" id="10_1gibd"]
 [ext_resource type="PackedScene" uid="uid://b3fbl6ai8k200" path="res://scenes/box_spawner.tscn" id="10_eao4d"]
 [ext_resource type="PackedScene" uid="uid://t3b2d50e5a4a" path="res://scenes/wand.tscn" id="11_n8f41"]
-[ext_resource type="PackedScene" uid="uid://5xh20tbobeb" path="res://scenes/shotgun.tscn" id="12_lbqga"]
+[ext_resource type="PackedScene" uid="uid://demek3llyoah0" path="res://scenes/shotgun.tscn" id="12_pphix"]
 [ext_resource type="LabelSettings" uid="uid://bu0rd8q5qya7e" path="res://label_setting.tres" id="12_yh4yd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wcd6e"]
@@ -176,11 +173,7 @@ size = Vector2i(384, 216)
 render_target_update_mode = 4
 
 [node name="Camera3D" parent="svc/sv" node_paths=PackedStringArray("target") instance=ExtResource("5_k05cb")]
-
 transform = Transform3D(1, 0, 0, 0, 0.992546, 0.121869, 0, -0.121869, 0.992546, 0.047573, 1.97415, 4.21767)
-
-transform = Transform3D(1, 0, 0, 0, 0.992546, 0.121869, 0, -0.121869, 0.992546, 0, 2.03, 5)
-
 target = NodePath("../../../player")
 
 [node name="dithering" type="ColorRect" parent="."]
@@ -209,9 +202,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.36425)
 [node name="box_holder" type="Node3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.541454, 0)
 
-[node name="real_pos" type="Node3D" parent="player/box_holder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45996, 0, 0)
-
 [node name="AudioListener3D" type="AudioListener3D" parent="player"]
 
 [node name="test_shader" type="CSGMesh3D" parent="."]
@@ -221,17 +211,20 @@ mesh = SubResource("SphereMesh_8ubnk")
 
 [node name="ar" parent="." instance=ExtResource("9_rai2g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88304, 1.30082, -0.378797)
+speed_when_holding = 0.9
 
 [node name="sub_machine_gun" parent="." instance=ExtResource("9_tmbis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.44601, 3.3455, 0)
 
 [node name="sniper" parent="." instance=ExtResource("10_1gibd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3012, 1.85441, 0.794827)
+mass = 4.0
 
 [node name="wand" parent="." instance=ExtResource("11_n8f41")]
 
-[node name="shotgun" parent="." instance=ExtResource("12_lbqga")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, 0.546146)
+[node name="shotgun" parent="." instance=ExtResource("12_pphix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.37497, 0.931703, 0)
+speed_when_holding = 0.9
 
 [node name="box_spawner" parent="." instance=ExtResource("10_eao4d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.80991, 5.19527, 0.0183089)
@@ -248,8 +241,8 @@ libraries = {
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1.0
-offset_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
 
 [node name="Panel" type="Panel" parent="UI"]
 layout_mode = 1

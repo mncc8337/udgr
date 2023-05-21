@@ -20,7 +20,6 @@ max_recoil = 0.0
 inaccuracy = 0.3
 firing_speed = 0.001
 magazine_size = 500
-view_range_increase_to = 8.0
 
 [node name="dsd" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24177, 0, 0)
