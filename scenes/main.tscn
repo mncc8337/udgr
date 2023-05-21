@@ -206,7 +206,7 @@ size = Vector2i(384, 216)
 render_target_update_mode = 4
 
 [node name="Camera3D" parent="svc/sv" node_paths=PackedStringArray("target") instance=ExtResource("5_k05cb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.03, 5)
+transform = Transform3D(1, 0, 0, 0, 0.992546, 0.121869, 0, -0.121869, 0.992546, 0, 2.03, 5)
 target = NodePath("../../../player")
 
 [node name="dithering" type="ColorRect" parent="."]
