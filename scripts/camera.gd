@@ -16,7 +16,7 @@ func _physics_process(delta):
 	mouse_pos = Vector3(mouse_vec.x, -mouse_vec.y, 0) * size/window.y
 	mouse_pos.y += position.z * tan(rotation.x)
 	mouse_vec.y *= window.x / window.y
-	mouse_vec *= .007
+	mouse_vec *= .015
 	
 	MAIN.mouse_pos_in_world = mouse_pos + position
 	MAIN.mouse_pos_in_world.z = 0
