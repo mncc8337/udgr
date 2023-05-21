@@ -137,7 +137,6 @@ shape = SubResource("BoxShape3D_dtl6l")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.177, 0.162867, 0)
 visible = false
 light_color = Color(1, 0.603922, 0, 1)
-light_energy = 5.0
 spot_range = 1000.0
 spot_angle = 73.97
 

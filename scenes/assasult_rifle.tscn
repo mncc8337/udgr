@@ -246,7 +246,6 @@ shape = SubResource("BoxShape3D_m4mpb")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.20737, 0.184407, 0)
 visible = false
 light_color = Color(1, 0.603922, 0, 1)
-light_energy = 5.0
 spot_range = 1000.0
 spot_angle = 75.0
 
