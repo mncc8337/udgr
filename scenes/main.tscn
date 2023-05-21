@@ -8,7 +8,7 @@
 [ext_resource type="Shader" path="res://shaders/vhs.gdshader" id="7_cnw40"]
 [ext_resource type="PackedScene" uid="uid://cecnee3pqjlk7" path="res://scenes/player.tscn" id="8_bp4hv"]
 [ext_resource type="PackedScene" uid="uid://bla3dq72k024l" path="res://scenes/assasult_rifle.tscn" id="9_rai2g"]
-[ext_resource type="PackedScene" uid="uid://cckmsw5oeppji" path="res://scenes/sub_machine_gun.tscn" id="9_tmbis"]
+[ext_resource type="PackedScene" uid="uid://yaoh2ohalhm3" path="res://scenes/sub_machine_gun.tscn" id="9_tmbis"]
 [ext_resource type="Script" path="res://scripts/gun.gd" id="10_8wssb"]
 [ext_resource type="PackedScene" uid="uid://b3fbl6ai8k200" path="res://scenes/box_spawner.tscn" id="10_eao4d"]
 [ext_resource type="PackedScene" uid="uid://t3b2d50e5a4a" path="res://scenes/wand.tscn" id="11_n8f41"]
@@ -200,6 +200,7 @@ script = ExtResource("4_p0a0y")
 
 [node name="sv" type="SubViewport" parent="svc"]
 handle_input_locally = false
+audio_listener_enable_3d = true
 size = Vector2i(384, 216)
 render_target_update_mode = 4
 
@@ -226,15 +227,6 @@ script = ExtResource("4_p0a0y")
 
 [node name="player" parent="." instance=ExtResource("8_bp4hv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.90432, 1.8782, 0)
-
-[node name="gun_holder" type="Node3D" parent="player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.36425)
-
-[node name="box_holder" type="Node3D" parent="player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.541454, 0)
-
-[node name="real_pos" type="Node3D" parent="player/box_holder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45996, 0, 0)
 
 [node name="test_shader" type="CSGMesh3D" parent="."]
 transform = Transform3D(0.0399899, 0.866604, -0.497392, -0.497392, 0.448997, 0.742296, 0.866604, 0.217714, 0.448997, 1.16575, 5.08305, 0.112773)
@@ -323,7 +315,11 @@ libraries = {
 [node name="Timer" type="Timer" parent="sniper"]
 one_shot = true
 
+[node name="firing_sound_pos" type="Node3D" parent="sniper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.06476, 0.170624, 0)
+
 [node name="wand" parent="." instance=ExtResource("11_n8f41")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8566, 3.50437, 0)
 
 [node name="box_spawner" parent="." instance=ExtResource("10_eao4d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.80991, 5.19527, 0.0183089)

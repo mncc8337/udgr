@@ -11,6 +11,7 @@ extends RigidBody3D
 @export var inaccuracy = 0.01
 @export var firing_speed = .1
 @export var magazine_size = 40
+@export var speed_when_holding = 1.0 # * 100 %
 @export var audio_stream: AudioStream
 @export var between_firing_animation = "no"
 
@@ -69,7 +70,7 @@ func play_firing_sound():
 	MAIN.add_child(audioStreamPlayer)
 	audioStreamPlayer.stream = audio_stream
 	audioStreamPlayer.global_position = $firing_sound_pos.global_position
-	audioStreamPlayer.pitch_scale = MAIN.rng.randf_range(0.9, 1.1)
+	audioStreamPlayer.pitch_scale = MAIN.rng.randf_range(0.8, 1.2)
 	audioStreamPlayer.volume_db = .8
 	
 	audioStreamPlayer.finished.connect(audioStreamPlayer.queue_free)

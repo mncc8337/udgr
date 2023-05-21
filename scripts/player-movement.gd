@@ -9,6 +9,8 @@ extends CharacterBody3D
 
 @onready var z = position.z
 
+var current_max_speed = SPEED;
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var pickables = []
 var holding: Node3D
@@ -47,6 +49,7 @@ func pick_gun():
 			holding.destructive_mode.emit()
 		holding.apply_force(Vector3(cos(angle), sin(angle), 0) * 1500)
 		holding = null
+		current_max_speed = SPEED
 		update_info_panel("", "")
 	elif not pickables.is_empty():
 		# remove any null in the begin of pickables
@@ -66,6 +69,8 @@ func pick_gun():
 			update_info_panel("box", "1/1")
 		holding.toggle_holding(true)
 		pickables.remove_at(0)
+		
+		current_max_speed = SPEED * holding.speed_when_holding
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("pickup"):
@@ -94,7 +99,7 @@ func _physics_process(delta):
 
 	var go_left  = int(Input.is_action_pressed("left"))
 	var go_right = int(Input.is_action_pressed("right"))
-	var new_speed = SPEED * (go_right - go_left)
+	var new_speed = current_max_speed * (go_right - go_left)
 	if new_speed != 0: # if object gain speed
 		velocity.x = lerp(velocity.x, new_speed, delta*5)
 	else:
