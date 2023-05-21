@@ -1,0 +1,329 @@
+[gd_scene load_steps=19 format=3 uid="uid://2hy6d11w4b8d"]
+
+[ext_resource type="Script" path="res://scripts/gun.gd" id="1_2so4f"]
+[ext_resource type="AudioStream" uid="uid://bqwk054ot6jk4" path="res://sfx/sr.mp3" id="2_utnap"]
+[ext_resource type="AudioStream" uid="uid://dcifs4fvnf0hn" path="res://sfx/snip_reload_bwfr.mp3" id="3_aha71"]
+[ext_resource type="AudioStream" uid="uid://2d048grnkn48" path="res://sfx/reload_mag_sr.mp3" id="4_my3bw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eahn7"]
+albedo_color = Color(0.231373, 0.231373, 0.231373, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgog0"]
+albedo_color = Color(0.54902, 0.54902, 0.54902, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pfr5s"]
+albedo_color = Color(0.431373, 0.431373, 0.431373, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v60ju"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b0mfo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynufc"]
+albedo_color = Color(0.34902, 0.639216, 0.160784, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o4xms"]
+albedo_color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_skj8c"]
+size = Vector3(0.478442, 0.199901, 0.137)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8l2h2"]
+size = Vector3(0.709172, 0.0602679, 0.137)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dtl6l"]
+size = Vector3(0.12063, 0.210771, 0.137)
+
+[sub_resource type="Animation" id="Animation_8wqsq"]
+resource_name = "reloading"
+length = 5.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dsd:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 4.4, 4.8),
+"transitions": PackedFloat32Array(1, 1, 1, 0.125),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.349066), Vector3(0, 0, 0.349066), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("dsd/mag:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.1, 1.3, 1.8, 2.4, 3.2, 3.7, 4, 4.3),
+"transitions": PackedFloat32Array(1, 1, 3.36359, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.25, -0.12, 0), Vector3(-0.25, -0.2, 0), Vector3(-1, -0.4, -0.6), Vector3(-1.5, -0.2, -0.6), Vector3(-1.5, -0.1, -0.6), Vector3(-1, -0.4, -0.6), Vector3(-0.5, -0.3, 0), Vector3(-0.25, -0.12, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("dsd/mag:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.8, 2.5, 3.2, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [true, true, false, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("dsd/mag:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.4, 3.7, 4.3, 4.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.418879), Vector3(0, 0, 0.418879), Vector3(0, 0, -0.418879), Vector3(0, 0, -0.418879), Vector3(0, 0, 0.418879), Vector3(0, 0, 0.418879)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("dsd:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.7, 4.1, 4.9),
+"transitions": PackedFloat32Array(4.28709, 0.153893, 2.63902, 0.297302),
+"update": 0,
+"values": [Vector3(0.898, 0.2, 0.03), Vector3(0.898, 0.8, 0.03), Vector3(0.898, 0.8, 0.03), Vector3(0.898, 0.2, 0.03)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("dsd/CSGCombiner3D3/CSGBox3D12:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 5, 5.1, 5.3, 5.4),
+"transitions": PackedFloat32Array(1, 2.63902, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.4, 0.125, 0.001), Vector3(-0.4, 0.125, 0.001), Vector3(-0.6, 0.125, 0.001), Vector3(-0.6, 0.125, 0.001), Vector3(-0.4, 0.125, 0.001)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("dsd/CSGCombiner3D3/CSGBox3D12:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 4.9, 5, 5.4, 5.5),
+"transitions": PackedFloat32Array(1, 1, 1, 6.06287, 1),
+"update": 0,
+"values": [Vector3(0.698132, 0, 0), Vector3(0.698132, 0, 0), Vector3(-0.872665, 0, 0), Vector3(-0.872665, 0, 0), Vector3(0.698132, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2xwd"]
+_data = {
+"reloading": SubResource("Animation_8wqsq")
+}
+
+[sub_resource type="Animation" id="Animation_bcscu"]
+resource_name = "between_firing_sniper"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dsd/CSGCombiner3D3/CSGBox3D12:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.4, 0.125, 0.001), Vector3(-0.6, 0.125, 0.001), Vector3(-0.6, 0.125, 0.001), Vector3(-0.4, 0.125, 0.001)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("dsd/CSGCombiner3D3/CSGBox3D12:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.698132, 0, 0), Vector3(-0.872665, 0, 0), Vector3(-0.872665, 0, 0), Vector3(0.698132, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cr107"]
+_data = {
+"between_firing_sniper": SubResource("Animation_bcscu")
+}
+
+[node name="sniper" type="RigidBody3D" node_paths=PackedStringArray("reload_sound_pos") groups=["gun"]]
+mass = 3.0
+script = ExtResource("1_2so4f")
+gun_name = "siu"
+animation_between_reload = "between_firing_sniper"
+damage = 120.0
+max_recoil = 0.5
+inaccuracy = 0.0
+firing_speed = 1.3
+magazine_size = 7
+audio_stream = ExtResource("2_utnap")
+speed_when_holding = 0.8
+reload_sound_pos = NodePath("dsd/mag")
+between_firing_animation = true
+
+[node name="dsd" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.898, 0.2, 0.03)
+
+[node name="barrel" type="CSGBox3D" parent="dsd"]
+transform = Transform3D(1.5, 0, 0, 0, 0.3, 0, 0, 0, 0.6, 1.58364, 0.0596337, 0)
+material_overlay = SubResource("StandardMaterial3D_eahn7")
+size = Vector3(1.424, 0.211, 0.076)
+
+[node name="muzzle" type="CSGBox3D" parent="dsd"]
+transform = Transform3D(0.2, 0, 0, 0, 0.7, 0, 0, 0, 1.5, 2.67619, 0.0640659, 0)
+material_overlay = SubResource("StandardMaterial3D_fgog0")
+size = Vector3(1.424, 0.211, 0.076)
+
+[node name="CSGCombiner3D3" type="CSGCombiner3D" parent="dsd"]
+transform = Transform3D(1, 0, 0, 0, 0.806352, -0.591436, 0, 0.591436, 0.806352, -0.1, 0.05, -0.05)
+material_overlay = SubResource("StandardMaterial3D_pfr5s")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="dsd/CSGCombiner3D3"]
+transform = Transform3D(2, 0, 0, 0, 1.53209, -1.28558, 0, 1.28558, 1.53209, -0.4, 0.125, 0.001)
+material_override = SubResource("StandardMaterial3D_v60ju")
+size = Vector3(0.01, 0.01, 0.01)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="dsd/CSGCombiner3D3/CSGBox3D12"]
+transform = Transform3D(1, 0, 0, 0, 0.775595, -0.631231, 0, 0.631231, 0.775595, -0.00285584, 0.0308656, 0.0395792)
+material_overlay = SubResource("StandardMaterial3D_b0mfo")
+size = Vector3(0.0271204, 0.111019, 0.0214675)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="dsd/CSGCombiner3D3/CSGBox3D12/CSGBox3D2"]
+transform = Transform3D(0.055331, -0.998354, -0.0150625, -0.59833, -0.0452303, 0.799973, -0.799338, -0.035251, -0.599848, 0, 0.0522218, -0.00106314)
+size = Vector3(0.0324293, 0.049, 0.0262814)
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="dsd"]
+material_overlay = SubResource("StandardMaterial3D_ynufc")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="dsd/CSGCombiner3D2"]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15196, -0.115473, 0)
+size = Vector3(1.424, 0.211, 0.076)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="dsd/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180179, 0.0223744, 0)
+size = Vector3(1.424, 0.211, 0.076)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="dsd/CSGCombiner3D2"]
+transform = Transform3D(0.661881, -0.0227846, 0, 0.227846, 0.0661881, 0, 0, 0, 0.45, -0.510953, -0.102228, 2.26498e-06)
+size = Vector3(0.2, 0.25, 0.038)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="dsd/CSGCombiner3D2"]
+transform = Transform3D(-0.330344, 0.00478787, 0, 0.0908062, -0.0754812, 0, 0, 0, 0.45, -0.607549, -0.115859, 1.54972e-06)
+size = Vector3(0.2, 0.25, 0.038)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="dsd/CSGCombiner3D2"]
+transform = Transform3D(-0.132814, 0.647643, 0, -0.323822, -0.265628, 0, 0, 0, 1.5, -0.845049, -0.147421, 5.96046e-07)
+size = Vector3(0.2, 0.25, 0.038)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="dsd/CSGCombiner3D2"]
+transform = Transform3D(0.0127574, 0.699884, 0, -0.699884, 0.0127574, 0, 0, 0, 1.5, -1.00283, -0.0960567, 5.96046e-07)
+size = Vector3(0.2, 0.25, 0.038)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="dsd/CSGCombiner3D2"]
+transform = Transform3D(0.461421, 0.385182, 0, -0.19259, 0.922841, 0, 0, 0, 1.5, -0.694695, -0.117008, 2.38419e-07)
+size = Vector3(0.2, 0.25, 0.038)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="dsd/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.839171, 0.0378307, 0)
+size = Vector3(0.762538, 0.175735, 0.076)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="dsd/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.201575, 0.138, 0)
+size = Vector3(1.48038, 0.0433152, 0.0323464)
+
+[node name="mag" type="CSGBox3D" parent="dsd"]
+transform = Transform3D(0.913546, -0.406737, 0, 0.406737, 0.913546, 0, 0, 0, 1, -0.25, -0.12, 0)
+material_overlay = SubResource("StandardMaterial3D_o4xms")
+size = Vector3(0.2, 0.25, 0.038)
+
+[node name="col1" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54318, 0.222355, 0)
+shape = SubResource("BoxShape3D_skj8c")
+
+[node name="col6" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 2, 0.266562, 0.0307016)
+shape = SubResource("BoxShape3D_skj8c")
+
+[node name="col7" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 2.76854, 0.266562, 0.0307016)
+shape = SubResource("BoxShape3D_skj8c")
+
+[node name="col8" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 3.51849, 0.266562, 0.0307016)
+shape = SubResource("BoxShape3D_skj8c")
+
+[node name="col5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.618496, 0.222355, 0)
+shape = SubResource("BoxShape3D_skj8c")
+
+[node name="col4" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.999932, -0.0116235, 0, 0.0116235, 0.999932, 0, 0, 0, 1, 0.0312609, 0.250032, -2.38418e-07)
+shape = SubResource("BoxShape3D_8l2h2")
+
+[node name="col2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.947768, -0.318959, 0, 0.318959, 0.947768, 0, 0, 0, 1, 0.0365286, 0.0498597, -0.00212491)
+shape = SubResource("BoxShape3D_8l2h2")
+
+[node name="col3" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.917018, -0.398845, 0, 0.398845, 0.917018, 0, 0, 0, 1, 0.650414, 0.0667184, -1.19209e-07)
+shape = SubResource("BoxShape3D_dtl6l")
+
+[node name="flash" type="SpotLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.00969, 0.179091, 0)
+visible = false
+light_color = Color(1, 0.603922, 0, 1)
+light_energy = 5.0
+spot_range = 1000.0
+spot_angle = 73.97
+
+[node name="flash_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="raycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97194, 0.257072, 0.0238035)
+target_position = Vector3(10000, 0, 0)
+
+[node name="start" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.162028, 0.230069, 0)
+
+[node name="reload_bwt_f_pos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0.398, 0.330498, 0.0467335)
+
+[node name="reload_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n2xwd")
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="firing_sound_pos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.28027, 0.0999999, 0)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cr107")
+}
+
+[node name="StreamPlayers" type="Node3D" parent="."]
+
+[node name="between_firing_sound" type="AudioStreamPlayer3D" parent="StreamPlayers"]
+stream = ExtResource("3_aha71")
+
+[node name="Reload_Sound" type="AudioStreamPlayer3D" parent="StreamPlayers"]
+stream = ExtResource("4_my3bw")
