@@ -23,7 +23,10 @@ var reloading_animation = false
 
 func _ready():
 	magazine = magazine_size
-	$Timer.wait_time = firing_speed
+	if between_firing_animation:
+		$Timer.wait_time = $AnimationPlayer.get_animation("between_firing").length
+	else:
+		$Timer.wait_time = firing_speed
 	$flash_timer.wait_time = .05
 	$flash_timer.timeout.connect(_on_flash_timer_timeout)
 	$AnimationPlayer.animation_finished.connect(_on_finish_reloaded)
@@ -120,9 +123,12 @@ func _process(_delta):
 	
 	if Input.is_action_just_pressed("reload") and is_holding and magazine != magazine_size:
 		reload()
-		
+	
 	var reloading_stopped = not $AnimationPlayer.is_playing()
-	if Input.is_action_just_pressed("fire") and not reloading_stopped and magazine > 0:
+	if (Input.is_action_just_pressed("fire")
+			and $AnimationPlayer.is_playing()
+			and $AnimationPlayer.current_animation == "reloading"
+			and magazine > 0):
 		$AnimationPlayer.stop()
 		get_parent().get_parent().is_reloading = false
 		
