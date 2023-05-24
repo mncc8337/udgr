@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://demek3llyoah0"]
+[gd_scene load_steps=12 format=3 uid="uid://demek3llyoah0"]
 
 [ext_resource type="Script" path="res://scripts/gun.gd" id="1_03o43"]
-[ext_resource type="AudioStream" uid="uid://d3bpnc1c0jg8l" path="res://sfx/rifle.mp3" id="2_3ph08"]
+[ext_resource type="AudioStream" uid="uid://sm2itxfusegf" path="res://sfx/shotgun_firing.mp3" id="2_8kvrn"]
+[ext_resource type="AudioStream" uid="uid://bmtn8k6b3j3s4" path="res://sfx/shotgun_break.mp3" id="3_xcal2"]
+[ext_resource type="AudioStream" uid="uid://dlifac2akh6h6" path="res://sfx/shotgun_bullet_in.mp3" id="4_03q3g"]
+[ext_resource type="AudioStream" uid="uid://csxydxnu0pywi" path="res://sfx/shotgun_close.mp3" id="5_rutr5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8utwe"]
 albedo_color = Color(0.419608, 0.447059, 0.509804, 1)
@@ -66,6 +69,42 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("mesh/stock/break:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("mesh/stock/bullet_in:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.7),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("mesh/stock/close:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ij36q"]
 _data = {
@@ -83,7 +122,7 @@ bullet_per_shot = 8
 firing_speed = 0.8
 view_range_increase_to = 5.0
 magazine_size = 2
-firing_audio_stream = ExtResource("2_3ph08")
+firing_audio_stream = ExtResource("2_8kvrn")
 speed_when_holding = 0.9
 
 [node name="mesh" type="CSGCombiner3D" parent="."]
@@ -101,6 +140,18 @@ size = Vector3(0.776, 0.211, 0.076)
 transform = Transform3D(0.894443, -0.447181, 0, 0.447181, 0.894443, 0, 0, 0, 1, 0.0725877, -0.122684, 0)
 operation = 2
 size = Vector3(0.80758, 0.188972, 0.156)
+
+[node name="break" type="AudioStreamPlayer3D" parent="mesh/stock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.329878, 0.186796, 0)
+stream = ExtResource("3_xcal2")
+
+[node name="bullet_in" type="AudioStreamPlayer3D" parent="mesh/stock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.329878, 0.186796, 0)
+stream = ExtResource("4_03q3g")
+
+[node name="close" type="AudioStreamPlayer3D" parent="mesh/stock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.329878, 0.186796, 0)
+stream = ExtResource("5_rutr5")
 
 [node name="body" type="CSGCombiner3D" parent="mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.490372, -0.0301263, 0)
@@ -135,7 +186,7 @@ transform = Transform3D(0.978537, -0.206067, 0, 0.206067, 0.978537, 0, 0, 0, 1, 
 shape = SubResource("BoxShape3D_8l2h2")
 
 [node name="flash" type="SpotLight3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.33124, 0.168564, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.44902, 0.146231, 0)
 visible = false
 light_color = Color(1, 0.603922, 0, 1)
 spot_range = 1000.0
@@ -145,7 +196,7 @@ spot_angle = 75.0
 one_shot = true
 
 [node name="raycast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.33526, 0.170588, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45304, 0.148255, 0)
 target_position = Vector3(10000, 0, 0)
 hit_from_inside = true
 
@@ -161,7 +212,7 @@ libraries = {
 one_shot = true
 
 [node name="firing_sound_pos" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.35722, 0.169209, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.475, 0.146876, 0)
 
 [node name="center" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.974382, 0.114633, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15449, 0.114633, 0)
